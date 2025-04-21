@@ -2,31 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Top Action Games for Android</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --primary-color: #8e44ad;
+      --secondary-color: #e74c3c;
+      --text-color: #333;
+      --text-light: #777;
+      --bg-color: #f5f5f5;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.15);
+      --border-radius: 12px;
+      --transition: all 0.3s ease;
+    }
+
     * {
       margin: 0;  
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     }
     
     body {
-      background: #f5f5f5;
+      background: var(--bg-color);
       padding: 15px;
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 10px;
     }
     
     h1 {
-      font-size: 22px;
+      font-size: 24px;
       text-align: center;
-      margin: 15px 0;
-      color: #333;
+      margin: 15px 0 20px;
+      color: var(--text-color);
+      font-weight: 600;
     }
     
     .search-container {
       margin: 20px 0;
       position: relative;
+      width: 100%;
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
@@ -34,19 +58,20 @@
     
     .search-bar {
       width: 100%;
-      padding: 14px 20px;
+      padding: 15px 20px;
       padding-left: 50px;
       border: 1px solid #e0e0e0;
       border-radius: 30px;
-      background: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
       font-size: 16px;
       outline: none;
-      transition: all 0.3s ease;
+      transition: var(--transition);
+      font-weight: 500;
     }
     
     .search-bar:focus {
-      border-color: #8e44ad;
+      border-color: var(--primary-color);
       box-shadow: 0 2px 15px rgba(142, 68, 173, 0.2);
     }
     
@@ -55,30 +80,37 @@
       left: 20px;
       top: 50%;
       transform: translateY(-50%);
-      color: #777;
-      width: 20px;
-      height: 20px;
+      color: var(--text-light);
+      font-size: 18px;
     }
     
     .game-list {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       gap: 15px;
       margin-top: 20px;
     }
     
+    @media (min-width: 768px) {
+      .game-list {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+      }
+    }
+    
     .game-item {
-      background: white;
-      border-radius: 10px;
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
       overflow: hidden;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
       cursor: pointer;
+      position: relative;
     }
     
     .game-item:hover {
       transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      box-shadow: var(--shadow-hover);
     }
     
     .game-item a {
@@ -90,53 +122,67 @@
     
     .game-item img {
       width: 100%;
-      height: 100px;
+      height: 120px;
       object-fit: cover;
+      border-bottom: 1px solid #f0f0f0;
     }
     
     .game-info {
-      padding: 10px;
+      padding: 12px;
     }
     
     .game-item h2 {
       font-size: 14px;
-      margin-bottom: 5px;
-      color: #333;
+      margin-bottom: 8px;
+      color: var(--text-color);
       line-height: 1.4;
+      font-weight: 600;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .badge-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 8px;
     }
     
     .mod-badge {
-      background: #8e44ad;
+      background: var(--primary-color);
       color: white;
       padding: 3px 8px;
       border-radius: 4px;
-      font-size: 12px;
-      display: inline-block;
-      margin-bottom: 5px;
-      margin-right: 5px;
-      font-weight: 500;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
     }
     
     .trending-badge {
-      background: #e74c3c;
+      background: var(--secondary-color);
       color: white;
       padding: 3px 8px;
       border-radius: 4px;
-      font-size: 12px;
-      display: inline-block;
-      margin-bottom: 5px;
-      font-weight: 500;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
     }
     
     .developer {
-      color: #777;
-      font-size: 12px;
-      margin-top: 3px;
+      color: var(--text-light);
+      font-size: 11px;
+      margin-top: 5px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     
     .rating {
       color: #f1c40f;
-      font-size: 13px;
+      font-size: 12px;
       margin: 5px 0;
     }
     
@@ -144,34 +190,76 @@
       text-align: center;
       grid-column: 1 / -1;
       padding: 40px 20px;
-      color: #777;
+      color: var(--text-light);
       font-size: 16px;
     }
     
     .search-results-count {
       text-align: center;
-      margin: 10px 0;
-      color: #777;
+      margin: 10px 0 20px;
+      color: var(--text-light);
       font-size: 14px;
+    }
+    
+    .download-btn {
+      display: block;
+      background: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 10px;
+      transition: var(--transition);
+    }
+    
+    .download-btn:hover {
+      background: #7d3c98;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .filter-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
   </style>
 </head>
 <body>
-  <h1>Top Action Games for Android</h1>
-  
-  <!-- Professional Search Bar -->
-  <div class="search-container">
-    <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M21 21L16.65 16.65" stroke="#777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <input type="text" id="searchInput" class="search-bar" placeholder="Search games by name..." autocomplete="off">
-  </div>
-  
-  <div id="searchResultsCount" class="search-results-count"></div>
+  <div class="container">
+    <div class="header">
+      <h1>Top Action Games for Android</h1>
+      <button class="filter-btn">
+        <i class="fas fa-filter"></i> Filter
+      </button>
+    </div>
+    
+    <!-- Professional Search Bar -->
+    <div class="search-container">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" id="searchInput" class="search-bar" placeholder="Search games by name..." autocomplete="off">
+    </div>
+    
+    <div id="searchResultsCount" class="search-results-count"></div>
 
-  <div class="game-list" id="gameList">
-    <!-- Games will be dynamically filtered by JavaScript -->
+    <div class="game-list" id="gameList">
+      <!-- Games will be dynamically filtered by JavaScript -->
+    </div>
   </div>
 
   <script>
@@ -194,7 +282,7 @@
         downloadUrl: "https://an1.com/7388-balatro-apk.html"
       },
       {
-        name: "Grand Theft Auto",
+        name: "Grand Theft Auto: San Andreas",
         image: "https://an1.com/uploads/posts/2025-02/1740568810_madout-2.png",
         developer: "Rockstar Games",
         mod: true,
@@ -262,179 +350,208 @@
         image: "https://an1.com/uploads/posts/2024-07/1721208786_shadow-knight.png",
         developer: "ChillyRoom",
         mod: true,
-        downloadUrl: "#"
+        trending: false,
+        downloadUrl: "https://an1.com/1234-shadow-depth-mod.html"
       },
       {
         name: "Piano Tiles 2",
         image: "https://an1.com/uploads/posts/2023-06/1686822863_bombsquad.jpg",
         developer: "Kooapps Games",
         mod: true,
-        downloadUrl: "#"
+        trending: false,
+        downloadUrl: "https://an1.com/5678-piano-tiles-mod.html"
       },
       {
         name: "Lords Mobile",
         image: "https://an1.com/uploads/posts/2024-04/1712343089_war-robots.jpg",
         developer: "IGG.COM",
-        downloadUrl: "#"
+        mod: false,
+        trending: false,
+        downloadUrl: "https://an1.com/9101-lords-mobile.html"
       },
       {
         name: "RACE",
         image: "https://an1.com/uploads/posts/2025-02/1739889524_world-robot-boxing.png",
         developer: "RACE Games",
         mod: true,
-        downloadUrl: "#"
+        trending: false,
+        downloadUrl: "https://an1.com/1122-race-mod.html"
       },
       {
         name: "Stickman Legends",
         image: "https://an1.com/uploads/posts/2025-04/1745057554_stickman-legends.png",
         developer: "ZITGA",
         mod: true,
-        downloadUrl: "#"
+        trending: true,
+        downloadUrl: "https://an1.com/3344-stickman-legends-mod.html"
       },
       {
         name: "Shadow Knight",
         image: "https://an1.com/uploads/posts/2024-07/1721208786_shadow-knight.png",
         developer: "Fansipan Limited",
         mod: true,
-        downloadUrl: "#"
+        trending: false,
+        downloadUrl: "https://an1.com/5566-shadow-knight-mod.html"
       },
       {
         name: "Standoff 2",
         image: "https://an1.com/uploads/posts/2025-03/1742824760_standoff-2.png",
         developer: "AXLEBOLT LTD",
-        downloadUrl: "#"
+        mod: false,
+        trending: true,
+        downloadUrl: "https://an1.com/7788-standoff2.html"
       },
       {
         name: "Sniper 3D",
         image: "https://an1.com/uploads/posts/2023-04/1682629437_sniper-3d.jpg",
         developer: "Wildlife Studios",
         mod: true,
-        downloadUrl: "#"
+        trending: false,
+        downloadUrl: "https://an1.com/9900-sniper3d-mod.html"
       },
       {
         name: "Mob Control",
         image: "https://an1.com/uploads/posts/2024-03/1709730091_mob-control.png",
         developer: "VOODOO",
         mod: true,
-        downloadUrl: "#"
+        trending: false,
+        downloadUrl: "https://an1.com/1123-mob-control-mod.html"
       },
       {
         name: "Hungry Shark World",
         image: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/34/a6/7d/34a67ddf-64ad-0a80-2ef4-c21914292822/AppIcon-0-0-1x_U007emarketing-0-8-0-0-85-220.png/230x0w.webp",
         developer: "Ubisoft",
         mod: true,
-        downloadUrl: "#"
+        trending: true,
+        downloadUrl: "https://an1.com/4455-hungry-shark-mod.html"
       },
       {
         name: "Blades of Brim",
         image: "https://an1.com/uploads/posts/2022-02/1644788600_blades-of-brim.jpg",
         developer: "SYBO Games",
         mod: true,
-        downloadUrl: "#"
+        trending: false,
+        downloadUrl: "https://an1.com/6677-blades-brim-mod.html"
       },
       {
         name: "BombSquad",
         image: "https://an1.com/uploads/posts/2023-06/1686822863_bombsquad.jpg",
         developer: "Eric Froemling",
         mod: true,
-        downloadUrl: "#"
+        trending: true,
+        downloadUrl: "https://an1.com/8899-bombsquad-mod.html"
       },
       {
         name: "Stickman Great War",
         image: "https://an1.com/uploads/posts/2025-03/1741543584_stickman-great-war.png",
         developer: "Sky Center",
         mod: true,
-        downloadUrl: "#"
+        trending: false,
+        downloadUrl: "https://an1.com/1011-stickman-war-mod.html"
       },
       {
         name: "Shadow Fight 2",
         image: "https://an1.com/uploads/posts/2022-04/1649772829_shadowfight2.png",
         developer: "NEKKI",
         mod: true,
-        downloadUrl: "#"
+        trending: true,
+        downloadUrl: "https://an1.com/1213-shadow-fight2-mod.html"
       },
       {
         name: "Last Day on Earth",
         image: "https://an1.com/uploads/posts/2023-05/1683145894_last-day.png",
         developer: "Kefir!",
         mod: true,
-        downloadUrl: "#"
+        trending: true,
+        downloadUrl: "https://an1.com/1415-last-day-mod.html"
       },
       {
         name: "Cover Fire",
         image: "https://an1.com/uploads/posts/2023-06/1686328890_cover-fire.jpg",
         developer: "Viva Games Studios",
         mod: true,
-        downloadUrl: "#"
+        trending: false,
+        downloadUrl: "https://an1.com/1617-cover-fire-mod.html"
       },
       {
         name: "Zombie Apocalypse",
         image: "https://an1.com/uploads/posts/2025-01/1736015889_zombie-apocalypse.png",
         developer: "Freeplay Inc",
         mod: true,
-        downloadUrl: "#"
+        trending: false,
+        downloadUrl: "https://an1.com/1819-zombie-apocalypse-mod.html"
       },
       {
         name: "Worms Zone",
         image: "https://an1.com/uploads/posts/2023-02/1677345667_worms-zone-io.png",
         developer: "CASUAL AZUR GAMES",
         mod: true,
-        downloadUrl: "#"
+        trending: false,
+        downloadUrl: "https://an1.com/2021-worms-zone-mod.html"
       },
       {
         name: "Denis Di Gebukin Warga",
         image: "https://an1.com/uploads/posts/2025-04/1745066133_denis-di-gebukin-warga.png",
         developer: "Sandi Afanan",
         mod: true,
-        downloadUrl: "#"
+        trending: true,
+        downloadUrl: "https://an1.com/2223-denis-gebukin-mod.html"
       },
       {
         name: "War Robots",
         image: "https://an1.com/uploads/posts/2024-04/1712343089_war-robots.jpg",
         developer: "MY.GAMES B.V.",
-        downloadUrl: "#"
+        mod: false,
+        trending: true,
+        downloadUrl: "https://an1.com/2425-war-robots.html"
       },
       {
         name: "Kick the Buddy",
         image: "https://an1.com/uploads/posts/2024-12/1735419830_kick-the-buddy.png",
         developer: "Playgendary Limited",
         mod: true,
-        downloadUrl: "#"
+        trending: false,
+        downloadUrl: "https://an1.com/2627-kick-buddy-mod.html"
       },
       {
         name: "Spider Fighter 3",
         image: "https://an1.com/uploads/posts/2023-09/1695804770_spider-fighter-3.png",
         developer: "Starplay DMCC",
         mod: true,
-        downloadUrl: "#"
+        trending: false,
+        downloadUrl: "https://an1.com/2829-spider-fighter-mod.html"
       },
       {
         name: "Into the Dead 2",
         image: "https://an1.com/uploads/posts/2022-03/1646843579_intothedead2.png",
         developer: "PIKPOK",
         mod: true,
-        downloadUrl: "#"
+        trending: true,
+        downloadUrl: "https://an1.com/3031-into-dead2-mod.html"
       },
       {
         name: "Zombie Catchers",
         image: "https://an1.com/uploads/posts/2022-09/1662993112_zombiecatchers.png",
         developer: "Deca Games",
         mod: true,
-        downloadUrl: "#"
+        trending: false,
+        downloadUrl: "https://an1.com/3233-zombie-catchers-mod.html"
       },
       {
         name: "Ninja Warrior",
         image: "https://an1.com/uploads/posts/2023-06/1687857174_ninja-warrior.png",
         developer: "TOH Games",
         mod: true,
-        downloadUrl: "#"
+        trending: false,
+        downloadUrl: "https://an1.com/3435-ninja-warrior-mod.html"
       },
       {
         name: "Ultimate Custom Night",
         image: "https://an1.com/uploads/posts/2024-01/1704181963_ultimate-custom-night.png",
         developer: "Clickteam USA LLC",
         mod: true,
-        downloadUrl: "#"
+        trending: true,
+        downloadUrl: "https://an1.com/3637-ultimate-custom-mod.html"
       }
     ];
 
@@ -442,6 +559,7 @@
     const searchInput = document.getElementById('searchInput');
     const gameList = document.getElementById('gameList');
     const searchResultsCount = document.getElementById('searchResultsCount');
+    const filterBtn = document.querySelector('.filter-btn');
 
     // Display all games initially
     displayGames(games);
@@ -455,6 +573,12 @@
       );
       
       displayGames(filteredGames);
+    });
+
+    // Filter button functionality
+    filterBtn.addEventListener('click', function() {
+      // This would open a filter modal in a complete implementation
+      alert('Filter functionality will be added here!');
     });
 
     // Function to display games
@@ -475,13 +599,16 @@
         
         gameItem.innerHTML = `
           <a href="${game.downloadUrl}" target="_blank">
-            <img src="${game.image}" alt="${game.name}">
+            <img src="${game.image}" alt="${game.name}" loading="lazy">
             <div class="game-info">
-              ${game.trending ? '<span class="trending-badge">TRENDING</span>' : ''}
-              ${game.mod ? '<span class="mod-badge">MOD</span>' : ''}
-              <h2>${game.name}${game.mod ? ' (MOD)' : ''}</h2>
+              <div class="badge-container">
+                ${game.trending ? '<span class="trending-badge">Trending</span>' : ''}
+                ${game.mod ? '<span class="mod-badge">MOD</span>' : ''}
+              </div>
+              <h2>${game.name}</h2>
               <div class="rating">★★★★★</div>
               <p class="developer">${game.developer}</p>
+              <div class="download-btn">Download</div>
             </div>
           </a>
         `;
