@@ -261,6 +261,7 @@
       width: 100%;
       padding-top: 100%;
       overflow: hidden;
+      background: rgba(0,0,0,0.3);
     }
     
     .game-item img {
@@ -460,907 +461,673 @@
   </div>
 
   <script>
-    // Game data array with download links
+    // Game data array parsed from that.txt
     const games = [
       {
-        name: "Minecraft (MOD)",
-        image: "https://an1.com/uploads/posts/2024-09/1727348015_minecraft.png",
-        developer: "Mojang",
-        mod: true,
-        trending: true,
-        category: "adventure",
-        size: "150MB",
-        version: "1.20.1",
-        downloadUrl: "https://an1.com/7361-minecraft-mod.html",
-        features: "Unlocked, Premium Features"
-      },
-      {
-        name: "Assassin's Creed Rebellion (MOD)",
+        name: "Assassin's Creed Rebellion",
         image: "https://an1.com/uploads/posts/2025-03/1741459836_assassins-creed-rebellion.png",
         developer: "Ubisoft Entertainment",
         mod: true,
         trending: true,
         category: "action",
-        size: "1.2GB",
-        version: "4.5.0",
-        downloadUrl: "https://an1.com/4483-assassins-creed-rebellion-mod.html",
-        features: "Unlimited Resources"
+        downloadUrl: "https://an1.com/4483-assassins-creed-rebellion-mod.html"
       },
       {
-        name: "FPS Online Strike (MOD)",
+        name: "FPS Online Strike",
         image: "https://an1.com/uploads/posts/2023-07/1688635580_fps-online-strike.jpg",
         developer: "FPS Shooter & Action Game",
         mod: true,
         trending: true,
         category: "shooter",
-        size: "350MB",
-        version: "1.8.2",
-        downloadUrl: "https://an1.com/7275-fps-online-strike-pvp-shooter-mod.html",
-        features: "Aimbot, Unlimited Ammo"
+        downloadUrl: "https://an1.com/7275-fps-online-strike-pvp-shooter-mod.html"
       },
       {
-        name: "Push'em all (MOD)",
+        name: "Push'em all",
         image: "https://an1.com/uploads/posts/2025-03/1741014299_pushem-all.png",
         developer: "VOODOO",
         mod: true,
         trending: true,
         category: "action",
-        size: "85MB",
-        version: "1.4.3",
-        downloadUrl: "https://an1.com/6261-pushem-all-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/6261-pushem-all-mod.html"
       },
       {
-        name: "BEYBLADE BURST (MOD)",
+        name: "BEYBLADE BURST",
         image: "https://an1.com/uploads/posts/2023-04/1680862210_beyblade-burst.png",
         developer: "Hasbro Inc.",
         mod: true,
         trending: true,
         category: "action",
-        size: "120MB",
-        version: "9.4.0",
-        downloadUrl: "https://an1.com/7193-beyblade-burst-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/7193-beyblade-burst-mod.html"
       },
       {
-        name: "Zombie Frontier 3 (MOD)",
+        name: "Zombie Frontier 3",
         image: "https://an1.com/uploads/posts/2023-08/1691497720_zombie-frontier-3.jpg",
         developer: "FT Games",
         mod: true,
         trending: true,
         category: "zombie",
-        size: "180MB",
-        version: "1.9.0",
-        downloadUrl: "https://an1.com/6527-zombie-frontier-3-sniper-fps-mod.html",
-        features: "Unlimited Ammo"
+        downloadUrl: "https://an1.com/6527-zombie-frontier-3-sniper-fps-mod.html"
       },
       {
-        name: "Grand Gangsters 3D (MOD)",
+        name: "Grand Gangsters 3D",
         image: "https://an1.com/uploads/posts/2023-05/1685278953_grand-gangsters-3d.png",
         developer: "Doodle Mobile Ltd.",
         mod: true,
         trending: true,
         category: "action",
-        size: "250MB",
-        version: "1.7.2",
-        downloadUrl: "https://an1.com/3861-grand-gangsters-3d-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/3861-grand-gangsters-3d-mod.html"
       },
       {
-        name: "Armed Heist (MOD)",
+        name: "Armed Heist",
         image: "https://an1.com/uploads/posts/2023-06/1687180901_armed-heist.jpg",
         developer: "Sozap",
         mod: true,
         trending: true,
         category: "shooter",
-        size: "350MB",
-        version: "3.3.1",
-        downloadUrl: "https://an1.com/6436-armed-heist-tps-3d-sniper-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/6436-armed-heist-tps-3d-sniper-mod.html"
       },
       {
-        name: "Last Hope Sniper - Zombie War (MOD)",
+        name: "Last Hope Sniper - Zombie War",
         image: "https://an1.com/uploads/posts/2023-08/1693056380_last-hope-sniper.jpg",
         developer: "JE Software AB",
         mod: true,
         trending: true,
         category: "zombie",
-        size: "120MB",
-        version: "1.8.5",
-        downloadUrl: "https://an1.com/5596-last-hope-sniper-zombie-war-mod.html",
-        features: "Unlimited Resources"
+        downloadUrl: "https://an1.com/5596-last-hope-sniper-zombie-war-mod.html"
       },
       {
-        name: "SAS: Zombie Assault 4 (MOD)",
+        name: "SAS: Zombie Assault 4",
         image: "https://an1.com/uploads/posts/2024-12/1734810786_sas-zombie-assault-4.png",
-        developer: "Ninja Kiwi",
+        developer: "ninja kiwi",
         mod: true,
         trending: true,
         category: "zombie",
-        size: "95MB",
-        version: "1.7.0",
-        downloadUrl: "https://an1.com/1381-sas-zombie-assault-4-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/1381-sas-zombie-assault-4-mod.html"
       },
       {
-        name: "Prey Day (MOD)",
+        name: "Prey Day",
         image: "https://an1.com/uploads/posts/2023-08/1691149372_prey-day.jpg",
         developer: "GreenPixel Ltd",
         mod: true,
         trending: true,
         category: "zombie",
-        size: "180MB",
-        version: "1.9.3",
-        downloadUrl: "https://an1.com/5086-prey-day-survival-mod.html",
-        features: "Unlimited Resources"
+        downloadUrl: "https://an1.com/5086-prey-day-survival-mod.html"
       },
       {
-        name: "Five Nights at Freddy's 5: Sister Location (MOD)",
+        name: "Five Nights at Freddy's 5: Sister Location",
         image: "https://an1.com/uploads/posts/2021-12/1640710654_fnaf5.png",
         developer: "Clickteam USA LLC",
         mod: true,
         trending: true,
         category: "adventure",
-        size: "85MB",
-        version: "2.0.2",
-        downloadUrl: "https://an1.com/4369-five-nights-at-freddys-sl-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/4369-five-nights-at-freddys-sl-mod.html"
       },
       {
-        name: "Five Nights at Freddy's 4 (MOD)",
+        name: "Five Nights at Freddy's 4",
         image: "https://an1.com/uploads/posts/2024-01/1704288680_fnaf4.png",
         developer: "Clickteam USA LLC",
         mod: true,
         trending: true,
         category: "adventure",
-        size: "75MB",
-        version: "1.2.1",
-        downloadUrl: "https://an1.com/553-five-nights-at-freddys-4.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/553-five-nights-at-freddys-4.html"
       },
       {
-        name: "Five Nights at Freddy's 3 (MOD)",
+        name: "Five Nights at Freddy's 3",
         image: "https://an1.com/uploads/posts/2024-01/1704290543_fnaf3.png",
         developer: "Clickteam USA LLC",
         mod: true,
         trending: true,
         category: "adventure",
-        size: "65MB",
-        version: "1.0.8",
-        downloadUrl: "https://an1.com/260-five-nights-at-freddys-3-unlocked.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/260-five-nights-at-freddys-3-unlocked.html"
       },
       {
-        name: "Sniper Zombie 3D (MOD)",
+        name: "Sniper Zombie 3D",
         image: "https://an1.com/uploads/posts/2025-01/1736011858_sniper-zombie-3d.png",
         developer: "VNGGames Studios",
         mod: true,
         trending: true,
         category: "zombie",
-        size: "120MB",
-        version: "1.5.2",
-        downloadUrl: "https://an1.com/7135-sniper-zombies-2-mod.html",
-        features: "Unlimited Ammo"
+        downloadUrl: "https://an1.com/7135-sniper-zombies-2-mod.html"
       },
       {
-        name: "Red Imposter (MOD)",
+        name: "Red Imposter",
         image: "https://an1.com/uploads/posts/2024-09/1727348015_minecraft.png",
         developer: "OneSoft Global PTE",
         mod: true,
         trending: true,
         category: "strategy",
-        size: "95MB",
-        version: "1.2.0",
-        downloadUrl: "https://an1.com/6705-red-imposter-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/6705-red-imposter-mod.html"
       },
       {
-        name: "Stacky Dash (MOD)",
+        name: "Stacky Dash",
         image: "https://an1.com/uploads/stack54trhutyjtyj.png",
         developer: "BORN2PLAY LTD.",
         mod: true,
         trending: true,
         category: "action",
-        size: "85MB",
-        version: "1.1.3",
-        downloadUrl: "https://an1.com/6692-stacky-dash-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/6692-stacky-dash-mod.html"
       },
       {
-        name: "Sky Whale (MOD)",
+        name: "Sky Whale",
         image: "https://an1.com/uploads/posts/2023-04/1681995969_berandal-sekolah.png",
         developer: "Nickelodeon",
         mod: true,
         trending: true,
         category: "adventure",
-        size: "120MB",
-        version: "1.0.5",
-        downloadUrl: "https://an1.com/2726-sky-whale-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/2726-sky-whale-mod.html"
       },
       {
-        name: "Bullet Boy (MOD)",
+        name: "Bullet Boy",
         image: "https://an1.com/uploads/bulletbat54rty56rft.png",
         developer: "Pomelo Games",
         mod: true,
         trending: true,
         category: "action",
-        size: "95MB",
-        version: "1.2.1",
-        downloadUrl: "https://an1.com/602-bullet-boy-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/602-bullet-boy-mod.html"
       },
       {
-        name: "Specimen Zero (MOD)",
+        name: "Specimen Zero",
         image: "https://an1.com/uploads/posts/2024-02/1707145334_specimen-zero.jpg",
         developer: "Cafe Studio",
         mod: true,
         trending: true,
         category: "adventure",
-        size: "180MB",
-        version: "1.1.0",
-        downloadUrl: "https://an1.com/7335-specimen-zero-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/7335-specimen-zero-mod.html"
       },
       {
-        name: "Berandal Sekolah (MOD)",
+        name: "Berandal Sekolah",
         image: "https://an1.com/uploads/posts/2023-04/1681995969_berandal-sekolah.png",
         developer: "Aim to Mite",
         mod: true,
         trending: true,
         category: "action",
-        size: "120MB",
-        version: "1.0.2",
-        downloadUrl: "https://an1.com/7207-berandal-sekolah-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/7207-berandal-sekolah-mod.html"
       },
       {
-        name: "Blast Hero (MOD)",
+        name: "Blast Hero",
         image: "https://an1.com/uploads/blasthero45.jpg",
         developer: "VOODOO",
         mod: true,
         trending: true,
         category: "action",
-        size: "85MB",
-        version: "1.0.8",
-        downloadUrl: "https://an1.com/6812-blast-hero-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/6812-blast-hero-mod.html"
       },
       {
-        name: "Z Escape (MOD)",
+        name: "Z Escape",
         image: "https://an1.com/uploads/nttalkdrt45t.png",
         developer: "HOMA GAMES",
         mod: true,
         trending: true,
         category: "adventure",
-        size: "95MB",
-        version: "1.1.2",
-        downloadUrl: "https://an1.com/6794-z-escape-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/6794-z-escape-mod.html"
       },
       {
-        name: "Call of Duty: Black Ops Zombies (MOD)",
+        name: "Call of Duty: Black Ops Zombies",
         image: "https://an1.com/uploads/codblazzz.png",
         developer: "Activision Publishing, Inc.",
         mod: true,
         trending: true,
         category: "zombie",
-        size: "1.5GB",
-        version: "1.0.8",
-        downloadUrl: "https://an1.com/2842-call-of-duty-black-ops-zombies-mod.html",
-        features: "Unlimited Ammo"
+        downloadUrl: "https://an1.com/2842-call-of-duty-black-ops-zombies-mod.html"
       },
       {
-        name: "Mars: Mars (MOD)",
+        name: "Mars: Mars",
         image: "https://an1.com/uploads/rmawmawmrmaw.png",
         developer: "Pomelo",
         mod: true,
         trending: true,
         category: "adventure",
-        size: "120MB",
-        version: "1.0.5",
-        downloadUrl: "https://an1.com/4272-mars-mars-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/4272-mars-mars-mod.html"
       },
       {
-        name: "Hoverboard Heroes (MOD)",
+        name: "Hoverboard Heroes",
         image: "https://an1.com/uploads/posts/2023-02/1675249406_hoverboard-heroes.png",
         developer: "Boom-808",
         mod: true,
         trending: true,
         category: "action",
-        size: "95MB",
-        version: "1.1.0",
-        downloadUrl: "https://an1.com/7157-hoverboard-heroes-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/7157-hoverboard-heroes-mod.html"
       },
       {
-        name: "Modern Sniper (MOD)",
+        name: "Modern Sniper",
         image: "https://an1.com/uploads/posts/2023-05/1684610786_modern-sniper.jpg",
         developer: "Candy Mobile",
         mod: true,
         trending: true,
         category: "shooter",
-        size: "120MB",
-        version: "1.2.1",
-        downloadUrl: "https://an1.com/6899-modern-sniper-mod.html",
-        features: "Unlimited Ammo"
+        downloadUrl: "https://an1.com/6899-modern-sniper-mod.html"
       },
       {
-        name: "Ultimate Bowmasters (MOD)",
+        name: "Ultimate Bowmasters",
         image: "https://an1.com/uploads/posts/2022-08/1661508196_ultimate-bowmasters.png",
         developer: "Playgendary Limited",
         mod: true,
         trending: true,
         category: "action",
-        size: "95MB",
-        version: "1.0.8",
-        downloadUrl: "https://an1.com/7131-ultimate-bowmasters-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/7131-ultimate-bowmasters-mod.html"
       },
       {
-        name: "Rope Hero (MOD)",
+        name: "Rope Hero",
         image: "https://an1.com/uploads/ropehrero120456r.jpg",
         developer: "Naxeex LLC",
         mod: true,
         trending: true,
         category: "action",
-        size: "120MB",
-        version: "1.2.0",
-        downloadUrl: "https://an1.com/3030-rope-hero-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/3030-rope-hero-mod.html"
       },
       {
-        name: "Smashy City (MOD)",
+        name: "Smashy City",
         image: "https://an1.com/uploads/smashivity45df.png",
         developer: "Ace Viral",
         mod: true,
         trending: true,
         category: "action",
-        size: "95MB",
-        version: "1.0.5",
-        downloadUrl: "https://an1.com/3644-smashy-city-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/3644-smashy-city-mod.html"
       },
       {
-        name: "Snipers vs Thieves (MOD)",
+        name: "Snipers vs Thieves",
         image: "https://an1.com/uploads/snirepgerighregrgrtg.jpg",
         developer: "PlayStack",
         mod: true,
         trending: true,
         category: "shooter",
-        size: "120MB",
-        version: "1.1.2",
-        downloadUrl: "https://an1.com/4933-snipers-vs-thieves-mod.html",
-        features: "Unlimited Ammo"
+        downloadUrl: "https://an1.com/4933-snipers-vs-thieves-mod.html"
       },
       {
-        name: "Hills of Steel 2 (MOD)",
+        name: "Hills of Steel 2",
         image: "https://an1.com/uploads/tankonthehillr8kdk2.png",
         developer: "Superplus Games",
         mod: true,
         trending: true,
         category: "action",
-        size: "95MB",
-        version: "1.0.8",
-        downloadUrl: "https://an1.com/6461-hills-of-steel-2-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/6461-hills-of-steel-2-mod.html"
       },
       {
-        name: "Modern Warplanes (MOD)",
+        name: "Modern Warplanes",
         image: "https://an1.com/uploads/posts/2023-06/1685648071_modern-warplanes.png",
         developer: "GDCompany",
         mod: true,
         trending: true,
         category: "action",
-        size: "350MB",
-        version: "1.2.1",
-        downloadUrl: "https://an1.com/6689-modern-warplanes-sky-fighters-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/6689-modern-warplanes-sky-fighters-mod.html"
       },
       {
-        name: "Grand Theft Auto III (MOD)",
+        name: "Grand Theft Auto III",
         image: "https://an1.com/uploads/posts/2023-05/1683631994_grand-theft-auto-iii.png",
         developer: "Rockstar Games",
         mod: true,
         trending: true,
         category: "action",
-        size: "1.8GB",
-        version: "1.12",
-        downloadUrl: "https://an1.com/7217-grand-theft-auto-iiiiiiii-mod-apk.html",
-        features: "All Missions Unlocked"
+        downloadUrl: "https://an1.com/7217-grand-theft-auto-iiiiiiii-mod-apk.html"
       },
       {
-        name: "Special Ops (MOD)",
+        name: "Special Ops",
         image: "https://an1.com/uploads/posts/2023-07/1689620142_special-ops.jpg",
         developer: "Hazmob",
         mod: true,
         trending: true,
         category: "shooter",
-        size: "120MB",
-        version: "1.0.5",
-        downloadUrl: "https://an1.com/7285-special-ops-fps-pvp-gun-games-mod.html",
-        features: "Unlimited Ammo"
+        downloadUrl: "https://an1.com/7285-special-ops-fps-pvp-gun-games-mod.html"
       },
       {
-        name: "Miami Crime Simulator (MOD)",
+        name: "Miami Crime Simulator",
         image: "https://an1.com/uploads/miamietuertertg.png",
         developer: "Naxeex Ltd",
         mod: true,
         trending: true,
         category: "action",
-        size: "350MB",
-        version: "1.2.0",
-        downloadUrl: "https://an1.com/6162-miami-crime-simulator-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/6162-miami-crime-simulator-mod.html"
       },
       {
-        name: "Shadow Fight 3 (MOD)",
+        name: "Shadow Fight 3",
         image: "https://an1.com/uploads/posts/2024-05/1715424442_shadow-fight-3.png",
         developer: "NEKKI",
         mod: true,
         trending: true,
         category: "action",
-        size: "180MB",
-        version: "1.30.0",
-        downloadUrl: "https://an1.com/4245-shadow-fight-3-mod.html",
-        features: "Unlimited Gems, Energy"
+        downloadUrl: "https://an1.com/4245-shadow-fight-3-mod.html"
       },
       {
-        name: "Into the Dead 2 (MOD)",
+        name: "Into the Dead 2",
         image: "https://an1.com/uploads/posts/2024-06/1719149242_into-the-dead-2.jpg",
         developer: "PIKPOK",
         mod: true,
         trending: true,
         category: "zombie",
-        size: "250MB",
-        version: "1.50.0",
-        downloadUrl: "https://an1.com/3552-into-the-dead-2-mod.html",
-        features: "Unlimited Gold, Weapons"
+        downloadUrl: "https://an1.com/3552-into-the-dead-2-mod.html"
       },
       {
-        name: "DEAD TARGET (MOD)",
+        name: "DEAD TARGET",
         image: "https://an1.com/uploads/posts/2024-07/1721553534_dead-target.jpg",
         developer: "VNG GAME STUDIOS",
         mod: true,
         trending: true,
         category: "zombie",
-        size: "180MB",
-        version: "5.4.0",
-        downloadUrl: "https://an1.com/4125-dead-target-zombie-mod.html",
-        features: "Unlimited Money, Ammo"
+        downloadUrl: "https://an1.com/4125-dead-target-zombie-mod.html"
       },
       {
-        name: "Battlelands Royale (MOD)",
+        name: "Battlelands Royale",
         image: "https://an1.com/uploads/posts/2023-09/1694609317_battlelands-royale.png",
         developer: "Futureplay",
         mod: true,
         trending: true,
         category: "shooter",
-        size: "120MB",
-        version: "2.8.0",
-        downloadUrl: "https://an1.com/6194-battlelands-royale-mod.html",
-        features: "Unlimited Skins, Currency"
+        downloadUrl: "https://an1.com/6194-battlelands-royale-mod.html"
       },
       {
-        name: "Brawl Stars (MOD)",
+        name: "Brawl Stars",
         image: "https://an1.com/uploads/posts/2023-11/1699523882_brawl-stars.png",
         developer: "Supercell",
         mod: true,
         trending: true,
         category: "action",
-        size: "350MB",
-        version: "51.218",
-        downloadUrl: "https://an1.com/7201-brawl-stars-mod.html",
-        features: "Unlimited Gems, Skins"
+        downloadUrl: "https://an1.com/7201-brawl-stars-mod.html"
       },
       {
-        name: "Cyberika (MOD)",
+        name: "Cyberika",
         image: "https://an1.com/uploads/posts/2024-02/1708427350_cyberika.jpg",
         developer: "Brickworks Games",
         mod: true,
         trending: true,
         category: "adventure",
-        size: "250MB",
-        version: "1.2.5",
-        downloadUrl: "https://an1.com/7093-cyberika-mod.html",
-        features: "Unlimited Money, Items"
+        downloadUrl: "https://an1.com/7093-cyberika-mod.html"
       },
       {
-        name: "Worms Zone.io (MOD)",
+        name: "Worms Zone.io",
         image: "https://an1.com/uploads/posts/2024-03/1710927337_worms-zone-io.png",
         developer: "CASUAL AZUR GAMES",
         mod: true,
         trending: true,
         category: "action",
-        size: "95MB",
-        version: "1.9.0",
-        downloadUrl: "https://an1.com/5675-worms-zone-io-mod.html",
-        features: "Unlimited Skins, Boosters"
+        downloadUrl: "https://an1.com/5675-worms-zone-io-mod.html"
       },
       {
-        name: "Mini Militia - Doodle Army 2 (MOD)",
+        name: "Mini Militia - Doodle Army 2",
         image: "https://an1.com/uploads/posts/2023-12/1702211151_mini-militia.jpg",
         developer: "Miniclip.com",
         mod: true,
         trending: true,
         category: "shooter",
-        size: "85MB",
-        version: "5.3.5",
-        downloadUrl: "https://an1.com/4045-mini-militia-doodle-army-2-mod.html",
-        features: "Unlimited Ammo, Health"
+        downloadUrl: "https://an1.com/4045-mini-militia-doodle-army-2-mod.html"
       },
       {
-        name: "MadOut2 BigCityOnline (MOD)",
+        name: "MadOut2 BigCityOnline",
         image: "https://an1.com/uploads/posts/2023-10/1697284917_madout2-bigcityonline.jpg",
         developer: "MadOut Games",
         mod: true,
         trending: true,
         category: "action",
-        size: "1.5GB",
-        version: "1.0.8",
-        downloadUrl: "https://an1.com/4746-madout2-bigcityonline-mod.html",
-        features: "Unlimited Money, Cars"
+        downloadUrl: "https://an1.com/4746-madout2-bigcityonline-mod.html"
       },
       {
-        name: "NEW STATE Mobile (MOD)",
+        name: "NEW STATE Mobile",
         image: "https://an1.com/uploads/posts/2024-02/1708599209_new-state.png",
         developer: "KRAFTON, Inc.",
         mod: true,
         trending: true,
         category: "shooter",
-        size: "2.3GB",
-        version: "0.9.42",
-        downloadUrl: "https://an1.com/6974-pubg-new-state-apk.html",
-        features: "Aimbot, Wallhack"
+        downloadUrl: "https://an1.com/6974-pubg-new-state-apk.html"
       },
       {
-        name: "PUBG MOBILE LITE (MOD)",
+        name: "PUBG MOBILE LITE",
         image: "https://an1.com/uploads/posts/2023-03/1678190134_pubg-mobile-lite.png",
         developer: "Level Infinite",
         mod: true,
         trending: true,
         category: "shooter",
-        size: "650MB",
-        version: "0.25.0",
-        downloadUrl: "https://an1.com/5229-pubg-mobile-lite-original.html",
-        features: "ESP, No Recoil"
+        downloadUrl: "https://an1.com/5229-pubg-mobile-lite-original.html"
       },
       {
-        name: "Soul Knight (MOD)",
+        name: "Soul Knight",
         image: "https://an1.com/uploads/posts/2023-08/1691487341_soul-knight.png",
         developer: "ChillyRoom",
         mod: true,
         trending: true,
         category: "action",
-        size: "180MB",
-        version: "5.3.5",
-        downloadUrl: "https://an1.com/1387-soul-knight-mod.html",
-        features: "Unlimited Gems, All Heroes"
+        downloadUrl: "https://an1.com/1387-soul-knight-mod.html"
       },
       {
-        name: "aquapark.io (MOD)",
+        name: "aquapark.io",
         image: "https://an1.com/uploads/otrihjytjh.png",
         developer: "VOODOO",
         mod: true,
         trending: true,
         category: "action",
-        size: "95MB",
-        version: "1.8.2",
-        downloadUrl: "https://an1.com/6426-aquapark-io-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/6426-aquapark-io-mod.html"
       },
       {
-        name: "Hair Challenge (MOD)",
+        name: "Hair Challenge",
         image: "https://an1.com/uploads/posts/2022-01/1643493633_hair-challenge.png",
         developer: "Rollic Games",
         mod: true,
         trending: true,
         category: "action",
-        size: "85MB",
-        version: "1.0.5",
-        downloadUrl: "https://an1.com/7032-hair-challenge-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/7032-hair-challenge-mod.html"
       },
       {
-        name: "Sigmax (MOD)",
+        name: "Sigmax",
         image: "https://an1.com/uploads/posts/2023-07/1690489934_sigmax.png",
         developer: "Studio Arm Private Limited",
         mod: true,
         trending: true,
         category: "action",
-        size: "120MB",
-        version: "1.0.8",
-        downloadUrl: "https://an1.com/7149-sigma.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/7149-sigma.html"
       },
       {
-        name: "Goosebumps (MOD)",
+        name: "Goosebumps",
         image: "https://an1.com/uploads/posts/2023-06/1687983272_goosebumps.jpg",
         developer: "Cosmic Forces",
         mod: true,
         trending: true,
         category: "adventure",
-        size: "95MB",
-        version: "1.0.2",
-        downloadUrl: "https://an1.com/7267-goosebumps-night-of-scares-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/7267-goosebumps-night-of-scares-mod.html"
       },
       {
-        name: "Banana Kong Blast (MOD)",
+        name: "Banana Kong Blast",
         image: "https://an1.com/uploads/bandnsfuwesrtgfrewt.png",
         developer: "FDG Entertainment GmbH",
         mod: true,
         trending: true,
         category: "action",
-        size: "120MB",
-        version: "1.0.5",
-        downloadUrl: "https://an1.com/5905-banana-kong-blast-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/5905-banana-kong-blast-mod.html"
       },
       {
-        name: "Metal Squad (MOD)",
+        name: "Metal Squad",
         image: "https://an1.com/uploads/nwqeqr32w4r234.png",
         developer: "Sora Game",
         mod: true,
         trending: true,
         category: "action",
-        size: "95MB",
-        version: "1.0.8",
-        downloadUrl: "https://an1.com/4456-metal-squad-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/4456-metal-squad-mod.html"
       },
       {
-        name: "Rocket Royale (MOD)",
+        name: "Rocket Royale",
         image: "https://an1.com/uploads/rocketoraelwaqe.jpg",
         developer: "OneTonGames",
         mod: true,
         trending: true,
         category: "action",
-        size: "120MB",
-        version: "1.2.0",
-        downloadUrl: "https://an1.com/4804-rocket-royale-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/4804-rocket-royale-mod.html"
       },
       {
-        name: "The Pirate: Caribbean Hunt (MOD)",
+        name: "The Pirate: Caribbean Hunt",
         image: "https://an1.com/uploads/posts/2023-05/1685361098_the-pirate.jpg",
         developer: "Home Net Games",
         mod: true,
         trending: true,
         category: "adventure",
-        size: "350MB",
-        version: "1.0.5",
-        downloadUrl: "https://an1.com/3359-the-pirate-caribbean-hunt-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/3359-the-pirate-caribbean-hunt-mod.html"
       },
       {
-        name: "Killer Bean Unleashed (MOD)",
+        name: "Killer Bean Unleashed",
         image: "https://an1.com/uploads/posts/2024-02/1708807132_killer-bean-unleashed.png",
         developer: "Killer Bean Studios",
         mod: true,
         trending: true,
         category: "action",
-        size: "120MB",
-        version: "1.0.2",
-        downloadUrl: "https://an1.com/7344-killer-bean-unleashed-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/7344-killer-bean-unleashed-mod.html"
       },
       {
-        name: "Smashy Road: Wanted (MOD)",
+        name: "Smashy Road: Wanted",
         image: "https://an1.com/uploads/smasfuhuertgeirt.png",
         developer: "Bearbit Studios B.V.",
         mod: true,
         trending: true,
         category: "action",
-        size: "95MB",
-        version: "1.0.8",
-        downloadUrl: "https://an1.com/1883-smashy-road-wanted-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/1883-smashy-road-wanted-mod.html"
       },
       {
-        name: "Mission Counter Attack (MOD)",
+        name: "Mission Counter Attack",
         image: "https://an1.com/uploads/misisottneet6i456rty.png",
         developer: "Timuz Games",
         mod: true,
         trending: true,
         category: "action",
-        size: "120MB",
-        version: "1.0.5",
-        downloadUrl: "https://an1.com/5784-mission-counter-attack-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/5784-mission-counter-attack-mod.html"
       },
       {
-        name: "Impostor Legends (MOD)",
+        name: "Impostor Legends",
         image: "https://an1.com/uploads/impsogntrig45yg4.png",
         developer: "Dats.Games",
         mod: true,
         trending: true,
         category: "strategy",
-        size: "95MB",
-        version: "1.0.2",
-        downloadUrl: "https://an1.com/6900-impostor-legends-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/6900-impostor-legends-mod.html"
       },
       {
-        name: "Johnny Trigger: Sniper (MOD)",
+        name: "Johnny Trigger: Sniper",
         image: "https://an1.com/uploads/trhiytiojytuj.png",
         developer: "SayGames",
         mod: true,
         trending: true,
         category: "action",
-        size: "120MB",
-        version: "1.0.8",
-        downloadUrl: "https://an1.com/6419-johnny-trigger-sniper-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/6419-johnny-trigger-sniper-mod.html"
       },
       {
-        name: "The Sun Origin (MOD)",
+        name: "The Sun Origin",
         image: "https://an1.com/uploads/posts/2022-01/1641920812_the-sun-origin.jpg",
         developer: "AGaming+",
         mod: true,
         trending: true,
         category: "action",
-        size: "350MB",
-        version: "1.0.5",
-        downloadUrl: "https://an1.com/5341-the-sun-origin-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/5341-the-sun-origin-mod.html"
       },
       {
-        name: "Ninja Arashi (MOD)",
+        name: "Ninja Arashi",
         image: "https://an1.com/uploads/posts/2023-07/1688564250_ninja-arashi.png",
         developer: "Black Panther",
         mod: true,
         trending: true,
         category: "action",
-        size: "95MB",
-        version: "1.0.8",
-        downloadUrl: "https://an1.com/7273-ninja-arashi-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/7273-ninja-arashi-mod.html"
       },
       {
-        name: "Bus Rush (MOD)",
+        name: "Bus Rush",
         image: "https://an1.com/uploads/bdewsauihjfgre.jpg",
         developer: "Play365",
         mod: true,
         trending: true,
         category: "action",
-        size: "120MB",
-        version: "1.0.5",
-        downloadUrl: "https://an1.com/2946-bus-rush-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/2946-bus-rush-mod.html"
       },
       {
-        name: "The Tank (MOD)",
+        name: "The Tank",
         image: "https://an1.com/uploads/posts/2022-07/1656671405_the-tank.png",
         developer: "BYV",
         mod: true,
         trending: true,
         category: "action",
-        size: "95MB",
-        version: "1.0.2",
-        downloadUrl: "https://an1.com/7127-the-tank-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/7127-the-tank-mod.html"
       },
       {
-        name: "Super Toss The Turtle (MOD)",
+        name: "Super Toss The Turtle",
         image: "https://an1.com/uploads/strhiojtrhr.jpg",
         developer: "GonzoSSM",
         mod: true,
         trending: true,
         category: "action",
-        size: "85MB",
-        version: "1.0.5",
-        downloadUrl: "https://an1.com/5834-super-toss-the-turtle-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/5834-super-toss-the-turtle-mod.html"
       },
       {
-        name: "Zombie Diary 2: Evolution (MOD)",
+        name: "Zombie Diary 2: Evolution",
         image: "https://an1.com/uploads/zbimtroyhiytj.png",
         developer: "Mountain Lion",
         mod: true,
         trending: true,
         category: "zombie",
-        size: "120MB",
-        version: "1.0.8",
-        downloadUrl: "https://an1.com/724-zombie-diary-2-evolution-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/724-zombie-diary-2-evolution-mod.html"
       },
       {
-        name: "Bullet Bender (MOD)",
+        name: "Bullet Bender",
         image: "https://an1.com/uploads/buretuihtrtyj.png",
         developer: "Lion Studios",
         mod: true,
         trending: true,
         category: "action",
-        size: "95MB",
-        version: "1.0.2",
-        downloadUrl: "https://an1.com/6367-bullet-bender-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/6367-bullet-bender-mod.html"
       },
       {
-        name: "Slap Kings (MOD)",
+        name: "Slap Kings",
         image: "https://an1.com/uploads/posts/2023-05/1684323557_slap-kings.png",
         developer: "Lion Studios",
         mod: true,
         trending: true,
         category: "action",
-        size: "120MB",
-        version: "1.0.8",
-        downloadUrl: "https://an1.com/6202-slap-kings-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/6202-slap-kings-mod.html"
       },
       {
-        name: "Last Hope - Zombie Sniper 3D (MOD)",
+        name: "Last Hope - Zombie Sniper 3D",
         image: "https://an1.com/uploads/bandnsfuwesrtgfrewt.png",
         developer: "JE Software AB",
         mod: true,
         trending: true,
         category: "zombie",
-        size: "95MB",
-        version: "1.0.5",
-        downloadUrl: "https://an1.com/5906-last-hope-zombie-sniper-3d-mod.html",
-        features: "Unlimited Ammo"
+        downloadUrl: "https://an1.com/5906-last-hope-zombie-sniper-3d-mod.html"
       },
       {
-        name: "Zombie Objective (MOD)",
+        name: "Zombie Objective",
         image: "https://an1.com/uploads/zbortighiergter.jpg",
         developer: "Killer Bean Studios",
         mod: true,
         trending: true,
         category: "zombie",
-        size: "120MB",
-        version: "1.0.2",
-        downloadUrl: "https://an1.com/1839-zombie-objective-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/1839-zombie-objective-mod.html"
       },
       {
-        name: "JCheater: San Andreas Edition (MOD)",
+        name: "JCheater: San Andreas Edition",
         image: "https://an1.com/uploads/gtawsadsd.png",
         developer: "Net Tech Development Ltd",
         mod: true,
         trending: true,
         category: "action",
-        size: "350MB",
-        version: "1.0.5",
-        downloadUrl: "https://an1.com/6166-jcheater-san-andreas-edition.html",
-        features: "All Cheats Unlocked"
+        downloadUrl: "https://an1.com/6166-jcheater-san-andreas-edition.html"
       },
       {
-        name: "Arrow.io (MOD)",
+        name: "Arrow.io",
         image: "https://an1.com/uploads/arrowiofdsf45645.png",
         developer: "Cheetah Games",
         mod: true,
         trending: true,
         category: "action",
-        size: "95MB",
-        version: "1.0.8",
-        downloadUrl: "https://an1.com/4415-arrow-io.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/4415-arrow-io.html"
       },
       {
-        name: "Hide Online - Hunters vs Props (MOD)",
+        name: "Hide Online - Hunters vs Props",
         image: "https://an1.com/uploads/hideolredutgyjerdterter.png",
         developer: "HitRock",
         mod: true,
         trending: true,
         category: "action",
-        size: "120MB",
-        version: "1.0.5",
-        downloadUrl: "https://an1.com/6865-hide-online-hunters-vs-props-mod.html",
-        features: "All Unlocked"
+        downloadUrl: "https://an1.com/6865-hide-online-hunters-vs-props-mod.html"
       },
       {
-        name: "Dragon Hills 2 (MOD)",
+        name: "Dragon Hills 2",
         image: "https://an1.com/uploads/dragrthjityh.png",
         developer: "Rebel Twins",
         mod: true,
         trending: true,
         category: "action",
-        size: "95MB",
-        version: "1.0.2",
-        downloadUrl: "https://an1.com/6914-dragon-hills-2-mod.html",
-        features: "Unlimited Money"
+        downloadUrl: "https://an1.com/6914-dragon-hills-2-mod.html"
       }
     ];
 
@@ -1436,35 +1203,78 @@
         const gameItem = document.createElement('div');
         gameItem.className = 'game-item';
         
-        // Fallback image if the main image fails to load
-        const imgFallback = `
-          <div class="game-image-container">
-            <img src="${game.image}" alt="${game.name}" loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/150/121212/8e44ad?text=${encodeURIComponent(game.name.substring(0,15))}'">
-            <div class="badge-container">
-              ${game.trending ? '<span class="trending-badge">Trending</span>' : ''}
-              ${game.mod ? '<span class="mod-badge">MOD</span>' : ''}
-            </div>
-          </div>
+        // Create image with fallback
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'game-image-container';
+        
+        const img = document.createElement('img');
+        img.src = game.image;
+        img.alt = game.name;
+        img.loading = 'lazy';
+        
+        // Fallback if image fails to load
+        img.onerror = function() {
+          const gameName = game.name.length > 15 ? game.name.substring(0,15)+'...' : game.name;
+          this.src = `https://via.placeholder.com/150/121212/8e44ad?text=${encodeURIComponent(gameName)}`;
+        };
+        
+        // Badges container
+        const badges = document.createElement('div');
+        badges.className = 'badge-container';
+        if (game.trending) {
+          const trendingBadge = document.createElement('span');
+          trendingBadge.className = 'trending-badge';
+          trendingBadge.textContent = 'Trending';
+          badges.appendChild(trendingBadge);
+        }
+        if (game.mod) {
+          const modBadge = document.createElement('span');
+          modBadge.className = 'mod-badge';
+          modBadge.textContent = 'MOD';
+          badges.appendChild(modBadge);
+        }
+        
+        imgContainer.appendChild(img);
+        imgContainer.appendChild(badges);
+        
+        // Game info
+        const gameInfo = document.createElement('div');
+        gameInfo.className = 'game-info';
+        
+        const title = document.createElement('h2');
+        title.textContent = game.name;
+        
+        const dev = document.createElement('p');
+        dev.className = 'developer';
+        dev.textContent = game.developer;
+        
+        const rating = document.createElement('div');
+        rating.className = 'rating';
+        rating.innerHTML = `
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
         `;
         
-        gameItem.innerHTML = `
-          <a href="${game.downloadUrl}" target="_blank">
-            ${imgFallback}
-            <div class="game-info">
-              <h2>${game.name}</h2>
-              <p class="developer">${game.developer}</p>
-              <div class="rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-              </div>
-              <span class="download-btn">Download v${game.version}</span>
-            </div>
-          </a>
-        `;
+        const downloadBtn = document.createElement('span');
+        downloadBtn.className = 'download-btn';
+        downloadBtn.textContent = 'Download Now';
         
+        gameInfo.appendChild(title);
+        gameInfo.appendChild(dev);
+        gameInfo.appendChild(rating);
+        gameInfo.appendChild(downloadBtn);
+        
+        // Link
+        const link = document.createElement('a');
+        link.href = game.downloadUrl;
+        link.target = '_blank';
+        link.appendChild(imgContainer);
+        link.appendChild(gameInfo);
+        
+        gameItem.appendChild(link);
         gameList.appendChild(gameItem);
       });
     }
