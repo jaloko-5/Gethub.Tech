@@ -73,11 +73,19 @@
       overflow: hidden;
       box-shadow: 0 3px 8px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
+      cursor: pointer;
     }
     
     .game-item:hover {
       transform: translateY(-5px);
       box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+    
+    .game-item a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      height: 100%;
     }
     
     .game-item img {
@@ -167,230 +175,266 @@
   </div>
 
   <script>
-    // Game data array
+    // Game data array with download links
     const games = [
       {
         name: "Minecraft",
         image: "https://an1.com/uploads/posts/2024-09/1727348015_minecraft.png",
         developer: "Mojang",
         mod: true,
-        trending: true
+        trending: true,
+        downloadUrl: "https://an1.com/7361-minecraft-mod.html"
       },
       {
         name: "Balatro",
         image: "https://an1.com/uploads/posts/2024-09/1727446853_balatro.png",
         developer: "LocalThunk",
         mod: true,
-        trending: true
+        trending: true,
+        downloadUrl: "https://an1.com/7388-balatro-apk.html"
       },
       {
         name: "Grand Theft Auto",
         image: "https://an1.com/uploads/posts/2025-02/1740568810_madout-2.png",
         developer: "Rockstar Games",
         mod: true,
-        trending: true
+        trending: true,
+        downloadUrl: "https://an1.com/5322-madout2-bigcityonline-mod.html"
       },
       {
         name: "Geometry Dash",
         image: "https://an1.com/uploads/posts/2025-02/1738504628_geometry-dash-world.png",
         developer: "RobTop Games",
         mod: true,
-        trending: true
+        trending: true,
+        downloadUrl: "https://an1.com/4423-geometry-dash-world-mod.html"
       },
       {
         name: "Bloons TD 6",
         image: "https://an1.com/uploads/posts/2023-12/1702505585_bloons-td-6.png",
         developer: "Ninja Kiwi",
         mod: true,
-        trending: true
+        trending: true,
+        downloadUrl: "https://an1.com/7041-bloons-td-6-mod.html"
       },
       {
         name: "Slay the Spire",
         image: "https://i.git99.com/upload/android/icon/2024/07/13/3092cac4f3e3cb433f02212a595d0951.jpg",
         developer: "Mega Crit Games",
         mod: true,
-        trending: true
+        trending: true,
+        downloadUrl: "https://happymod.com/slay-the-spire-mod/com.humble.SlayTheSpire/"
       },
       {
         name: "Stardew Valley",
         image: "https://an1.com/uploads/posts/2023-09/1694252952_stardew-valley.png",
         developer: "ConcernedApe",
         mod: true,
-        trending: true
+        trending: true,
+        downloadUrl: "https://an1.com/5466-stardew-valley-mod.html"
       },
       {
         name: "Animal Crossing: Pocket Camp",
         image: "https://i.git99.com/upload/android/icon/2024/12/03/fc3b3c76541d87134b9f977846953f85.jpg",
         developer: "Nintendo",
         mod: true,
-        trending: true
+        trending: true,
+        downloadUrl: "https://happymod.com/animal-crossing-pocket-camp-c-mod/com.nintendo.zasa/"
       },
       {
         name: "My Boy! - GBA Emulator",
         image: "https://an1.com/uploads/posts/2023-09/1695637660_my-boy.png",
         developer: "Fast Emulator",
         mod: true,
-        trending: true
+        trending: true,
+        downloadUrl: "https://an1.com/7311-my-boy-gba-emulator.html"
       },
       {
         name: "Terraria",
         image: "https://an1.com/uploads/posts/2023-09/1695859322_terraria.png",
         developer: "Re-Logic",
         mod: true,
-        trending: true
+        trending: true,
+        downloadUrl: "https://an1.com/374-teraria-mod.html"
       },
       {
         name: "Shadow of the Depth",
         image: "https://an1.com/uploads/posts/2024-07/1721208786_shadow-knight.png",
         developer: "ChillyRoom",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Piano Tiles 2",
         image: "https://an1.com/uploads/posts/2023-06/1686822863_bombsquad.jpg",
         developer: "Kooapps Games",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Lords Mobile",
         image: "https://an1.com/uploads/posts/2024-04/1712343089_war-robots.jpg",
-        developer: "IGG.COM"
+        developer: "IGG.COM",
+        downloadUrl: "#"
       },
       {
         name: "RACE",
         image: "https://an1.com/uploads/posts/2025-02/1739889524_world-robot-boxing.png",
         developer: "RACE Games",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Stickman Legends",
         image: "https://an1.com/uploads/posts/2025-04/1745057554_stickman-legends.png",
         developer: "ZITGA",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Shadow Knight",
         image: "https://an1.com/uploads/posts/2024-07/1721208786_shadow-knight.png",
         developer: "Fansipan Limited",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Standoff 2",
         image: "https://an1.com/uploads/posts/2025-03/1742824760_standoff-2.png",
-        developer: "AXLEBOLT LTD"
+        developer: "AXLEBOLT LTD",
+        downloadUrl: "#"
       },
       {
         name: "Sniper 3D",
         image: "https://an1.com/uploads/posts/2023-04/1682629437_sniper-3d.jpg",
         developer: "Wildlife Studios",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Mob Control",
         image: "https://an1.com/uploads/posts/2024-03/1709730091_mob-control.png",
         developer: "VOODOO",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Hungry Shark World",
         image: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/34/a6/7d/34a67ddf-64ad-0a80-2ef4-c21914292822/AppIcon-0-0-1x_U007emarketing-0-8-0-0-85-220.png/230x0w.webp",
         developer: "Ubisoft",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Blades of Brim",
         image: "https://an1.com/uploads/posts/2022-02/1644788600_blades-of-brim.jpg",
         developer: "SYBO Games",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "BombSquad",
         image: "https://an1.com/uploads/posts/2023-06/1686822863_bombsquad.jpg",
         developer: "Eric Froemling",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Stickman Great War",
         image: "https://an1.com/uploads/posts/2025-03/1741543584_stickman-great-war.png",
         developer: "Sky Center",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Shadow Fight 2",
         image: "https://an1.com/uploads/posts/2022-04/1649772829_shadowfight2.png",
         developer: "NEKKI",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Last Day on Earth",
         image: "https://an1.com/uploads/posts/2023-05/1683145894_last-day.png",
         developer: "Kefir!",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Cover Fire",
         image: "https://an1.com/uploads/posts/2023-06/1686328890_cover-fire.jpg",
         developer: "Viva Games Studios",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Zombie Apocalypse",
         image: "https://an1.com/uploads/posts/2025-01/1736015889_zombie-apocalypse.png",
         developer: "Freeplay Inc",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Worms Zone",
         image: "https://an1.com/uploads/posts/2023-02/1677345667_worms-zone-io.png",
         developer: "CASUAL AZUR GAMES",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Denis Di Gebukin Warga",
         image: "https://an1.com/uploads/posts/2025-04/1745066133_denis-di-gebukin-warga.png",
         developer: "Sandi Afanan",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "War Robots",
         image: "https://an1.com/uploads/posts/2024-04/1712343089_war-robots.jpg",
-        developer: "MY.GAMES B.V."
+        developer: "MY.GAMES B.V.",
+        downloadUrl: "#"
       },
       {
         name: "Kick the Buddy",
         image: "https://an1.com/uploads/posts/2024-12/1735419830_kick-the-buddy.png",
         developer: "Playgendary Limited",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Spider Fighter 3",
         image: "https://an1.com/uploads/posts/2023-09/1695804770_spider-fighter-3.png",
         developer: "Starplay DMCC",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Into the Dead 2",
         image: "https://an1.com/uploads/posts/2022-03/1646843579_intothedead2.png",
         developer: "PIKPOK",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Zombie Catchers",
         image: "https://an1.com/uploads/posts/2022-09/1662993112_zombiecatchers.png",
         developer: "Deca Games",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Ninja Warrior",
         image: "https://an1.com/uploads/posts/2023-06/1687857174_ninja-warrior.png",
         developer: "TOH Games",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       },
       {
         name: "Ultimate Custom Night",
         image: "https://an1.com/uploads/posts/2024-01/1704181963_ultimate-custom-night.png",
         developer: "Clickteam USA LLC",
-        mod: true
+        mod: true,
+        downloadUrl: "#"
       }
     ];
 
@@ -430,14 +474,16 @@
         gameItem.className = 'game-item';
         
         gameItem.innerHTML = `
-          <img src="${game.image}" alt="${game.name}">
-          <div class="game-info">
-            ${game.trending ? '<span class="trending-badge">TRENDING</span>' : ''}
-            ${game.mod ? '<span class="mod-badge">MOD</span>' : ''}
-            <h2>${game.name}${game.mod ? ' (MOD)' : ''}</h2>
-            <div class="rating">★★★★★</div>
-            <p class="developer">${game.developer}</p>
-          </div>
+          <a href="${game.downloadUrl}" target="_blank">
+            <img src="${game.image}" alt="${game.name}">
+            <div class="game-info">
+              ${game.trending ? '<span class="trending-badge">TRENDING</span>' : ''}
+              ${game.mod ? '<span class="mod-badge">MOD</span>' : ''}
+              <h2>${game.name}${game.mod ? ' (MOD)' : ''}</h2>
+              <div class="rating">★★★★★</div>
+              <p class="developer">${game.developer}</p>
+            </div>
+          </a>
         `;
         
         gameList.appendChild(gameItem);
