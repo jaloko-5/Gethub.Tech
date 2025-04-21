@@ -14,110 +14,137 @@
     
     body {
       background: #f5f5f5;
-      padding: 10px;
+      padding: 15px;
     }
     
     h1 {
-      font-size: 18px;
+      font-size: 22px;
       text-align: center;
-      margin: 10px 0;
+      margin: 15px 0;
       color: #333;
     }
     
     .search-container {
-      margin: 15px 0;
+      margin: 20px 0;
       position: relative;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
     
     .search-bar {
       width: 100%;
-      padding: 12px 20px;
-      padding-left: 45px;
-      border: none;
-      border-radius: 25px;
+      padding: 14px 20px;
+      padding-left: 50px;
+      border: 1px solid #e0e0e0;
+      border-radius: 30px;
       background: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      font-size: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      font-size: 16px;
       outline: none;
       transition: all 0.3s ease;
     }
     
     .search-bar:focus {
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      border-color: #8e44ad;
+      box-shadow: 0 2px 15px rgba(142, 68, 173, 0.2);
     }
     
     .search-icon {
       position: absolute;
-      left: 15px;
+      left: 20px;
       top: 50%;
       transform: translateY(-50%);
       color: #777;
+      width: 20px;
+      height: 20px;
     }
     
     .game-list {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
     }
     
     .game-item {
       background: white;
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
     }
     
     .game-item:hover {
-      transform: translateY(-3px);
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     }
     
     .game-item img {
       width: 100%;
-      height: 90px;
+      height: 100px;
       object-fit: cover;
     }
     
     .game-info {
-      padding: 8px;
+      padding: 10px;
     }
     
     .game-item h2 {
-      font-size: 13px;
-      margin-bottom: 4px;
+      font-size: 14px;
+      margin-bottom: 5px;
       color: #333;
-      line-height: 1.3;
+      line-height: 1.4;
     }
     
     .mod-badge {
       background: #8e44ad;
       color: white;
-      padding: 2px 5px;
-      border-radius: 3px;
-      font-size: 11px;
-      display: inline-block;
-      margin-bottom: 4px;
-    }
-    
-    .developer {
-      color: #777;
-      font-size: 11px;
-    }
-    
-    .rating {
-      color: #f1c40f;
+      padding: 3px 8px;
+      border-radius: 4px;
       font-size: 12px;
-      margin: 3px 0;
+      display: inline-block;
+      margin-bottom: 5px;
+      margin-right: 5px;
+      font-weight: 500;
     }
     
     .trending-badge {
       background: #e74c3c;
       color: white;
-      padding: 2px 5px;
-      border-radius: 3px;
-      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 12px;
       display: inline-block;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    
+    .developer {
+      color: #777;
+      font-size: 12px;
+      margin-top: 3px;
+    }
+    
+    .rating {
+      color: #f1c40f;
+      font-size: 13px;
+      margin: 5px 0;
+    }
+    
+    .no-results {
+      text-align: center;
+      grid-column: 1 / -1;
+      padding: 40px 20px;
+      color: #777;
+      font-size: 16px;
+    }
+    
+    .search-results-count {
+      text-align: center;
+      margin: 10px 0;
+      color: #777;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -126,417 +153,296 @@
   
   <!-- Professional Search Bar -->
   <div class="search-container">
-    <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M21 21L16.65 16.65" stroke="#777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    <input type="text" class="search-bar" placeholder="Search games...">
+    <input type="text" id="searchInput" class="search-bar" placeholder="Search games by name..." autocomplete="off">
+  </div>
+  
+  <div id="searchResultsCount" class="search-results-count"></div>
+
+  <div class="game-list" id="gameList">
+    <!-- Games will be dynamically filtered by JavaScript -->
   </div>
 
-  <div class="game-list">
-    <!-- Minecraft -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2024-09/1727348015_minecraft.png" alt="Minecraft">
-      <div class="game-info">
-        <span class="trending-badge">TRENDING</span>
-        <span class="mod-badge">MOD</span>
-        <h2>Minecraft (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Mojang</p>
-      </div>
-    </div>
+  <script>
+    // Game data array
+    const games = [
+      {
+        name: "Minecraft",
+        image: "https://an1.com/uploads/posts/2024-09/1727348015_minecraft.png",
+        developer: "Mojang",
+        mod: true,
+        trending: true
+      },
+      {
+        name: "Balatro",
+        image: "https://an1.com/uploads/posts/2024-09/1727446853_balatro.png",
+        developer: "LocalThunk",
+        mod: true,
+        trending: true
+      },
+      {
+        name: "Grand Theft Auto",
+        image: "https://an1.com/uploads/posts/2025-02/1740568810_madout-2.png",
+        developer: "Rockstar Games",
+        mod: true,
+        trending: true
+      },
+      {
+        name: "Geometry Dash",
+        image: "https://an1.com/uploads/posts/2025-02/1738504628_geometry-dash-world.png",
+        developer: "RobTop Games",
+        mod: true,
+        trending: true
+      },
+      {
+        name: "Bloons TD 6",
+        image: "https://an1.com/uploads/posts/2023-12/1702505585_bloons-td-6.png",
+        developer: "Ninja Kiwi",
+        mod: true,
+        trending: true
+      },
+      {
+        name: "Slay the Spire",
+        image: "https://i.git99.com/upload/android/icon/2024/07/13/3092cac4f3e3cb433f02212a595d0951.jpg",
+        developer: "Mega Crit Games",
+        mod: true,
+        trending: true
+      },
+      {
+        name: "Stardew Valley",
+        image: "https://an1.com/uploads/posts/2023-09/1694252952_stardew-valley.png",
+        developer: "ConcernedApe",
+        mod: true,
+        trending: true
+      },
+      {
+        name: "Animal Crossing: Pocket Camp",
+        image: "https://i.git99.com/upload/android/icon/2024/12/03/fc3b3c76541d87134b9f977846953f85.jpg",
+        developer: "Nintendo",
+        mod: true,
+        trending: true
+      },
+      {
+        name: "My Boy! - GBA Emulator",
+        image: "https://an1.com/uploads/posts/2023-09/1695637660_my-boy.png",
+        developer: "Fast Emulator",
+        mod: true,
+        trending: true
+      },
+      {
+        name: "Terraria",
+        image: "https://an1.com/uploads/posts/2023-09/1695859322_terraria.png",
+        developer: "Re-Logic",
+        mod: true,
+        trending: true
+      },
+      {
+        name: "Shadow of the Depth",
+        image: "https://an1.com/uploads/posts/2024-07/1721208786_shadow-knight.png",
+        developer: "ChillyRoom",
+        mod: true
+      },
+      {
+        name: "Piano Tiles 2",
+        image: "https://an1.com/uploads/posts/2023-06/1686822863_bombsquad.jpg",
+        developer: "Kooapps Games",
+        mod: true
+      },
+      {
+        name: "Lords Mobile",
+        image: "https://an1.com/uploads/posts/2024-04/1712343089_war-robots.jpg",
+        developer: "IGG.COM"
+      },
+      {
+        name: "RACE",
+        image: "https://an1.com/uploads/posts/2025-02/1739889524_world-robot-boxing.png",
+        developer: "RACE Games",
+        mod: true
+      },
+      {
+        name: "Stickman Legends",
+        image: "https://an1.com/uploads/posts/2025-04/1745057554_stickman-legends.png",
+        developer: "ZITGA",
+        mod: true
+      },
+      {
+        name: "Shadow Knight",
+        image: "https://an1.com/uploads/posts/2024-07/1721208786_shadow-knight.png",
+        developer: "Fansipan Limited",
+        mod: true
+      },
+      {
+        name: "Standoff 2",
+        image: "https://an1.com/uploads/posts/2025-03/1742824760_standoff-2.png",
+        developer: "AXLEBOLT LTD"
+      },
+      {
+        name: "Sniper 3D",
+        image: "https://an1.com/uploads/posts/2023-04/1682629437_sniper-3d.jpg",
+        developer: "Wildlife Studios",
+        mod: true
+      },
+      {
+        name: "Mob Control",
+        image: "https://an1.com/uploads/posts/2024-03/1709730091_mob-control.png",
+        developer: "VOODOO",
+        mod: true
+      },
+      {
+        name: "Hungry Shark World",
+        image: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/34/a6/7d/34a67ddf-64ad-0a80-2ef4-c21914292822/AppIcon-0-0-1x_U007emarketing-0-8-0-0-85-220.png/230x0w.webp",
+        developer: "Ubisoft",
+        mod: true
+      },
+      {
+        name: "Blades of Brim",
+        image: "https://an1.com/uploads/posts/2022-02/1644788600_blades-of-brim.jpg",
+        developer: "SYBO Games",
+        mod: true
+      },
+      {
+        name: "BombSquad",
+        image: "https://an1.com/uploads/posts/2023-06/1686822863_bombsquad.jpg",
+        developer: "Eric Froemling",
+        mod: true
+      },
+      {
+        name: "Stickman Great War",
+        image: "https://an1.com/uploads/posts/2025-03/1741543584_stickman-great-war.png",
+        developer: "Sky Center",
+        mod: true
+      },
+      {
+        name: "Shadow Fight 2",
+        image: "https://an1.com/uploads/posts/2022-04/1649772829_shadowfight2.png",
+        developer: "NEKKI",
+        mod: true
+      },
+      {
+        name: "Last Day on Earth",
+        image: "https://an1.com/uploads/posts/2023-05/1683145894_last-day.png",
+        developer: "Kefir!",
+        mod: true
+      },
+      {
+        name: "Cover Fire",
+        image: "https://an1.com/uploads/posts/2023-06/1686328890_cover-fire.jpg",
+        developer: "Viva Games Studios",
+        mod: true
+      },
+      {
+        name: "Zombie Apocalypse",
+        image: "https://an1.com/uploads/posts/2025-01/1736015889_zombie-apocalypse.png",
+        developer: "Freeplay Inc",
+        mod: true
+      },
+      {
+        name: "Worms Zone",
+        image: "https://an1.com/uploads/posts/2023-02/1677345667_worms-zone-io.png",
+        developer: "CASUAL AZUR GAMES",
+        mod: true
+      },
+      {
+        name: "Denis Di Gebukin Warga",
+        image: "https://an1.com/uploads/posts/2025-04/1745066133_denis-di-gebukin-warga.png",
+        developer: "Sandi Afanan",
+        mod: true
+      },
+      {
+        name: "War Robots",
+        image: "https://an1.com/uploads/posts/2024-04/1712343089_war-robots.jpg",
+        developer: "MY.GAMES B.V."
+      },
+      {
+        name: "Kick the Buddy",
+        image: "https://an1.com/uploads/posts/2024-12/1735419830_kick-the-buddy.png",
+        developer: "Playgendary Limited",
+        mod: true
+      },
+      {
+        name: "Spider Fighter 3",
+        image: "https://an1.com/uploads/posts/2023-09/1695804770_spider-fighter-3.png",
+        developer: "Starplay DMCC",
+        mod: true
+      },
+      {
+        name: "Into the Dead 2",
+        image: "https://an1.com/uploads/posts/2022-03/1646843579_intothedead2.png",
+        developer: "PIKPOK",
+        mod: true
+      },
+      {
+        name: "Zombie Catchers",
+        image: "https://an1.com/uploads/posts/2022-09/1662993112_zombiecatchers.png",
+        developer: "Deca Games",
+        mod: true
+      },
+      {
+        name: "Ninja Warrior",
+        image: "https://an1.com/uploads/posts/2023-06/1687857174_ninja-warrior.png",
+        developer: "TOH Games",
+        mod: true
+      },
+      {
+        name: "Ultimate Custom Night",
+        image: "https://an1.com/uploads/posts/2024-01/1704181963_ultimate-custom-night.png",
+        developer: "Clickteam USA LLC",
+        mod: true
+      }
+    ];
 
-    <!-- Balatro -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2024-09/1727446853_balatro.png" alt="Balatro">
-      <div class="game-info">
-        <span class="trending-badge">TRENDING</span>
-        <span class="mod-badge">MOD</span>
-        <h2>Balatro (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">LocalThunk</p>
-      </div>
-    </div>
+    // DOM elements
+    const searchInput = document.getElementById('searchInput');
+    const gameList = document.getElementById('gameList');
+    const searchResultsCount = document.getElementById('searchResultsCount');
 
-    <!-- Grand Theft Auto -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2025-02/1740568810_madout-2.png" alt="Grand Theft Auto">
-      <div class="game-info">
-        <span class="trending-badge">TRENDING</span>
-        <span class="mod-badge">MOD</span>
-        <h2>Grand Theft Auto (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Rockstar Games</p>
-      </div>
-    </div>
+    // Display all games initially
+    displayGames(games);
 
-    <!-- Geometry Dash -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2025-02/1738504628_geometry-dash-world.png" alt="Geometry Dash">
-      <div class="game-info">
-        <span class="trending-badge">TRENDING</span>
-        <span class="mod-badge">MOD</span>
-        <h2>Geometry Dash (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">RobTop Games</p>
-      </div>
-    </div>
+    // Search functionality
+    searchInput.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      const filteredGames = games.filter(game => 
+        game.name.toLowerCase().includes(searchTerm) || 
+        game.developer.toLowerCase().includes(searchTerm)
+      );
+      
+      displayGames(filteredGames);
+    });
 
-    <!-- Bloons TD 6 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2023-12/1702505585_bloons-td-6.png" alt="Bloons TD 6">
-      <div class="game-info">
-        <span class="trending-badge">TRENDING</span>
-        <span class="mod-badge">MOD</span>
-        <h2>Bloons TD 6 (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Ninja Kiwi</p>
-      </div>
-    </div>
-
-    <!-- Slay the Spire -->
-    <div class="game-item">
-      <img src="https://i.git99.com/upload/android/icon/2024/07/13/3092cac4f3e3cb433f02212a595d0951.jpg" alt="Slay the Spire">
-      <div class="game-info">
-        <span class="trending-badge">TRENDING</span>
-        <span class="mod-badge">MOD</span>
-        <h2>Slay the Spire (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Mega Crit Games</p>
-      </div>
-    </div>
-
-    <!-- Stardew Valley -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2023-09/1694252952_stardew-valley.png" alt="Stardew Valley">
-      <div class="game-info">
-        <span class="trending-badge">TRENDING</span>
-        <span class="mod-badge">MOD</span>
-        <h2>Stardew Valley (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">ConcernedApe</p>
-      </div>
-    </div>
-
-    <!-- Animal Crossing: Pocket Camp -->
-    <div class="game-item">
-      <img src="https://i.git99.com/upload/android/icon/2024/12/03/fc3b3c76541d87134b9f977846953f85.jpg" alt="Animal Crossing: Pocket Camp">
-      <div class="game-info">
-        <span class="trending-badge">TRENDING</span>
-        <span class="mod-badge">MOD</span>
-        <h2>Animal Crossing: Pocket Camp (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Nintendo</p>
-      </div>
-    </div>
-
-    <!-- My Boy! - GBA Emulator -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2023-09/1695637660_my-boy.png" alt="My Boy! - GBA Emulator">
-      <div class="game-info">
-        <span class="trending-badge">TRENDING</span>
-        <span class="mod-badge">MOD</span>
-        <h2>My Boy! - GBA Emulator (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Fast Emulator</p>
-      </div>
-    </div>
-
-    <!-- Terraria -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2023-09/1695859322_terraria.png" alt="Terraria">
-      <div class="game-info">
-        <span class="trending-badge">TRENDING</span>
-        <span class="mod-badge">MOD</span>
-        <h2>Terraria (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Re-Logic</p>
-      </div>
-    </div>
-
-    <!-- Original games follow below -->
-    <!-- Game 1 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2024-07/1721208786_shadow-knight.png" alt="Shadow of the Depth">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Shadow of the Depth (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">ChillyRoom</p>
-      </div>
-    </div>
-
-    <!-- Game 2 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2023-06/1686822863_bombsquad.jpg" alt="Piano Tiles 2">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Piano Tiles 2 (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Kooapps Games</p>
-      </div>
-    </div>
-
-    <!-- Game 3 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2024-04/1712343089_war-robots.jpg" alt="Lords Mobile">
-      <div class="game-info">
-        <h2>Lords Mobile</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">IGG.COM</p>
-      </div>
-    </div>
-
-    <!-- Game 4 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2025-02/1739889524_world-robot-boxing.png" alt="RACE">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>RACE (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">RACE Games</p>
-      </div>
-    </div>
-
-    <!-- Game 5 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2025-04/1745057554_stickman-legends.png" alt="Stickman Legends">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Stickman Legends (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">ZITGA</p>
-      </div>
-    </div>
-
-    <!-- Game 6 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2024-07/1721208786_shadow-knight.png" alt="Shadow Knight">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Shadow Knight (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Fansipan Limited</p>
-      </div>
-    </div>
-
-    <!-- Game 7 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2025-03/1742824760_standoff-2.png" alt="Standoff 2">
-      <div class="game-info">
-        <h2>Standoff 2</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">AXLEBOLT LTD</p>
-      </div>
-    </div>
-
-    <!-- Game 8 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2023-04/1682629437_sniper-3d.jpg" alt="Sniper 3D">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Sniper 3D (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Wildlife Studios</p>
-      </div>
-    </div>
-
-    <!-- Game 9 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2024-03/1709730091_mob-control.png" alt="Mob Control">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Mob Control (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">VOODOO</p>
-      </div>
-    </div>
-
-    <!-- Game 10 -->
-    <div class="game-item">
-      <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/34/a6/7d/34a67ddf-64ad-0a80-2ef4-c21914292822/AppIcon-0-0-1x_U007emarketing-0-8-0-0-85-220.png/230x0w.webp" alt="Hungry Shark World">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Hungry Shark World (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Ubisoft</p>
-      </div>
-    </div>
-
-    <!-- Game 11 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2022-02/1644788600_blades-of-brim.jpg" alt="Blades of Brim">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Blades of Brim (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">SYBO Games</p>
-      </div>
-    </div>
-
-    <!-- Game 12 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2023-06/1686822863_bombsquad.jpg" alt="BombSquad">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>BombSquad (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Eric Froemling</p>
-      </div>
-    </div>
-
-    <!-- Game 13 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2025-03/1741543584_stickman-great-war.png" alt="Stickman Great War">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Stickman Great War (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Sky Center</p>
-      </div>
-    </div>
-
-    <!-- Game 14 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2022-04/1649772829_shadowfight2.png" alt="Shadow Fight 2">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Shadow Fight 2 (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">NEKKI</p>
-      </div>
-    </div>
-
-    <!-- Game 15 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2023-05/1683145894_last-day.png" alt="Last Day on Earth">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Last Day on Earth (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Kefir!</p>
-      </div>
-    </div>
-
-    <!-- Game 16 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2023-06/1686328890_cover-fire.jpg" alt="Cover Fire">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Cover Fire (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Viva Games Studios</p>
-      </div>
-    </div>
-
-    <!-- Game 17 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2025-01/1736015889_zombie-apocalypse.png" alt="Zombie Apocalypse">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Zombie Apocalypse (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Freeplay Inc</p>
-      </div>
-    </div>
-
-    <!-- Game 18 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2023-02/1677345667_worms-zone-io.png" alt="Worms Zone">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Worms Zone (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">CASUAL AZUR GAMES</p>
-      </div>
-    </div>
-
-    <!-- Game 19 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2025-04/1745066133_denis-di-gebukin-warga.png" alt="Denis Di Gebukin Warga">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Denis Di Gebukin Warga (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Sandi Afanan</p>
-      </div>
-    </div>
-
-    <!-- Game 20 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2024-04/1712343089_war-robots.jpg" alt="War Robots">
-      <div class="game-info">
-        <h2>War Robots</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">MY.GAMES B.V.</p>
-      </div>
-    </div>
-
-    <!-- Game 21 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2024-12/1735419830_kick-the-buddy.png" alt="Kick the Buddy">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Kick the Buddy (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Playgendary Limited</p>
-      </div>
-    </div>
-
-    <!-- Game 22 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2023-09/1695804770_spider-fighter-3.png" alt="Spider Fighter 3">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Spider Fighter 3 (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Starplay DMCC</p>
-      </div>
-    </div>
-
-    <!-- Game 23 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2022-03/1646843579_intothedead2.png" alt="Into the Dead 2">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Into the Dead 2 (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">PIKPOK</p>
-      </div>
-    </div>
-
-    <!-- Game 24 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2022-09/1662993112_zombiecatchers.png" alt="Zombie Catchers">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Zombie Catchers (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Deca Games</p>
-      </div>
-    </div>
-
-    <!-- Game 25 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2023-06/1687857174_ninja-warrior.png" alt="Ninja Warrior">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Ninja Warrior (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">TOH Games</p>
-      </div>
-    </div>
-
-    <!-- Game 26 -->
-    <div class="game-item">
-      <img src="https://an1.com/uploads/posts/2024-01/1704181963_ultimate-custom-night.png" alt="Ultimate Custom Night">
-      <div class="game-info">
-        <span class="mod-badge">MOD</span>
-        <h2>Ultimate Custom Night (MOD)</h2>
-        <div class="rating">★★★★★</div>
-        <p class="developer">Clickteam USA LLC</p>
-      </div>
-    </div>
-  </div>
+    // Function to display games
+    function displayGames(gamesToDisplay) {
+      gameList.innerHTML = '';
+      
+      if (gamesToDisplay.length === 0) {
+        gameList.innerHTML = '<div class="no-results">No games found matching your search</div>';
+        searchResultsCount.textContent = '';
+        return;
+      }
+      
+      searchResultsCount.textContent = `Showing ${gamesToDisplay.length} of ${games.length} games`;
+      
+      gamesToDisplay.forEach(game => {
+        const gameItem = document.createElement('div');
+        gameItem.className = 'game-item';
+        
+        gameItem.innerHTML = `
+          <img src="${game.image}" alt="${game.name}">
+          <div class="game-info">
+            ${game.trending ? '<span class="trending-badge">TRENDING</span>' : ''}
+            ${game.mod ? '<span class="mod-badge">MOD</span>' : ''}
+            <h2>${game.name}${game.mod ? ' (MOD)' : ''}</h2>
+            <div class="rating">★★★★★</div>
+            <p class="developer">${game.developer}</p>
+          </div>
+        `;
+        
+        gameList.appendChild(gameItem);
+      });
+    }
+  </script>
 </body>
 </html>
