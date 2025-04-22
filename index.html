@@ -411,6 +411,19 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+
+    /* Accessibility improvements */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
   </style>
 </head>
 <body>
@@ -431,8 +444,9 @@
     
     <!-- Professional Search Bar -->
     <div class="search-container">
-      <i class="fas fa-search search-icon"></i>
-      <input type="text" id="searchInput" class="search-bar" placeholder="Search games by name..." autocomplete="off">
+      <i class="fas fa-search search-icon" aria-hidden="true"></i>
+      <span class="sr-only">Search games</span>
+      <input type="text" id="searchInput" class="search-bar" placeholder="Search games by name..." autocomplete="off" aria-label="Search games">
     </div>
     
     <div class="filter-buttons">
@@ -451,7 +465,7 @@
     <div class="game-list" id="gameList">
       <!-- Loading animation initially -->
       <div class="loading">
-        <div class="spinner"></div>
+        <div class="spinner" aria-label="Loading games"></div>
       </div>
     </div>
     
@@ -461,7 +475,7 @@
   </div>
 
   <script>
-    // Game data array parsed from that.txt
+    // Game data array with corrected syntax
     const games = [
       {
         name: "Assassin's Creed Rebellion",
@@ -469,8 +483,7 @@
         developer: "Ubisoft Entertainment",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/4483-assassins-creed-rebellion-mod.html"
+        category: "action"
       },
       {
         name: "FPS Online Strike",
@@ -478,8 +491,7 @@
         developer: "FPS Shooter & Action Game",
         mod: true,
         trending: true,
-        category: "shooter",
-        downloadUrl: "https://an1.com/7275-fps-online-strike-pvp-shooter-mod.html"
+        category: "shooter"
       },
       {
         name: "Push'em all",
@@ -487,8 +499,7 @@
         developer: "VOODOO",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/6261-pushem-all-mod.html"
+        category: "action"
       },
       {
         name: "BEYBLADE BURST",
@@ -496,8 +507,7 @@
         developer: "Hasbro Inc.",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/7193-beyblade-burst-mod.html"
+        category: "action"
       },
       {
         name: "Zombie Frontier 3",
@@ -505,8 +515,7 @@
         developer: "FT Games",
         mod: true,
         trending: true,
-        category: "zombie",
-        downloadUrl: "https://an1.com/6527-zombie-frontier-3-sniper-fps-mod.html"
+        category: "zombie"
       },
       {
         name: "Grand Gangsters 3D",
@@ -514,8 +523,7 @@
         developer: "Doodle Mobile Ltd.",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/3861-grand-gangsters-3d-mod.html"
+        category: "action"
       },
       {
         name: "Armed Heist",
@@ -523,8 +531,7 @@
         developer: "Sozap",
         mod: true,
         trending: true,
-        category: "shooter",
-        downloadUrl: "https://an1.com/6436-armed-heist-tps-3d-sniper-mod.html"
+        category: "shooter"
       },
       {
         name: "Last Hope Sniper - Zombie War",
@@ -532,8 +539,7 @@
         developer: "JE Software AB",
         mod: true,
         trending: true,
-        category: "zombie",
-        downloadUrl: "https://an1.com/5596-last-hope-sniper-zombie-war-mod.html"
+        category: "zombie"
       },
       {
         name: "SAS: Zombie Assault 4",
@@ -541,8 +547,7 @@
         developer: "ninja kiwi",
         mod: true,
         trending: true,
-        category: "zombie",
-        downloadUrl: "https://an1.com/1381-sas-zombie-assault-4-mod.html"
+        category: "zombie"
       },
       {
         name: "Prey Day",
@@ -550,8 +555,7 @@
         developer: "GreenPixel Ltd",
         mod: true,
         trending: true,
-        category: "zombie",
-        downloadUrl: "https://an1.com/5086-prey-day-survival-mod.html"
+        category: "zombie"
       },
       {
         name: "Five Nights at Freddy's 5: Sister Location",
@@ -559,8 +563,7 @@
         developer: "Clickteam USA LLC",
         mod: true,
         trending: true,
-        category: "adventure",
-        downloadUrl: "https://an1.com/4369-five-nights-at-freddys-sl-mod.html"
+        category: "adventure"
       },
       {
         name: "Five Nights at Freddy's 4",
@@ -568,8 +571,7 @@
         developer: "Clickteam USA LLC",
         mod: true,
         trending: true,
-        category: "adventure",
-        downloadUrl: "https://an1.com/553-five-nights-at-freddys-4.html"
+        category: "adventure"
       },
       {
         name: "Five Nights at Freddy's 3",
@@ -577,8 +579,7 @@
         developer: "Clickteam USA LLC",
         mod: true,
         trending: true,
-        category: "adventure",
-        downloadUrl: "https://an1.com/260-five-nights-at-freddys-3-unlocked.html"
+        category: "adventure"
       },
       {
         name: "Sniper Zombie 3D",
@@ -586,8 +587,7 @@
         developer: "VNGGames Studios",
         mod: true,
         trending: true,
-        category: "zombie",
-        downloadUrl: "https://an1.com/7135-sniper-zombies-2-mod.html"
+        category: "zombie"
       },
       {
         name: "Red Imposter",
@@ -595,8 +595,7 @@
         developer: "OneSoft Global PTE",
         mod: true,
         trending: true,
-        category: "strategy",
-        downloadUrl: "https://an1.com/6705-red-imposter-mod.html"
+        category: "strategy"
       },
       {
         name: "Stacky Dash",
@@ -604,8 +603,7 @@
         developer: "BORN2PLAY LTD.",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/6692-stacky-dash-mod.html"
+        category: "action"
       },
       {
         name: "Sky Whale",
@@ -613,8 +611,7 @@
         developer: "Nickelodeon",
         mod: true,
         trending: true,
-        category: "adventure",
-        downloadUrl: "https://an1.com/2726-sky-whale-mod.html"
+        category: "adventure"
       },
       {
         name: "Bullet Boy",
@@ -622,8 +619,7 @@
         developer: "Pomelo Games",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/602-bullet-boy-mod.html"
+        category: "action"
       },
       {
         name: "Specimen Zero",
@@ -631,8 +627,7 @@
         developer: "Cafe Studio",
         mod: true,
         trending: true,
-        category: "adventure",
-        downloadUrl: "https://an1.com/7335-specimen-zero-mod.html"
+        category: "adventure"
       },
       {
         name: "Berandal Sekolah",
@@ -640,8 +635,7 @@
         developer: "Aim to Mite",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/7207-berandal-sekolah-mod.html"
+        category: "action"
       },
       {
         name: "Blast Hero",
@@ -649,8 +643,7 @@
         developer: "VOODOO",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/6812-blast-hero-mod.html"
+        category: "action"
       },
       {
         name: "Z Escape",
@@ -658,8 +651,7 @@
         developer: "HOMA GAMES",
         mod: true,
         trending: true,
-        category: "adventure",
-        downloadUrl: "https://an1.com/6794-z-escape-mod.html"
+        category: "adventure"
       },
       {
         name: "Call of Duty: Black Ops Zombies",
@@ -667,8 +659,7 @@
         developer: "Activision Publishing, Inc.",
         mod: true,
         trending: true,
-        category: "zombie",
-        downloadUrl: "https://an1.com/2842-call-of-duty-black-ops-zombies-mod.html"
+        category: "zombie"
       },
       {
         name: "Mars: Mars",
@@ -676,8 +667,7 @@
         developer: "Pomelo",
         mod: true,
         trending: true,
-        category: "adventure",
-        downloadUrl: "https://an1.com/4272-mars-mars-mod.html"
+        category: "adventure"
       },
       {
         name: "Hoverboard Heroes",
@@ -685,8 +675,7 @@
         developer: "Boom-808",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/7157-hoverboard-heroes-mod.html"
+        category: "action"
       },
       {
         name: "Modern Sniper",
@@ -694,8 +683,7 @@
         developer: "Candy Mobile",
         mod: true,
         trending: true,
-        category: "shooter",
-        downloadUrl: "https://an1.com/6899-modern-sniper-mod.html"
+        category: "shooter"
       },
       {
         name: "Ultimate Bowmasters",
@@ -703,8 +691,7 @@
         developer: "Playgendary Limited",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/7131-ultimate-bowmasters-mod.html"
+        category: "action"
       },
       {
         name: "Rope Hero",
@@ -712,8 +699,7 @@
         developer: "Naxeex LLC",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/3030-rope-hero-mod.html"
+        category: "action"
       },
       {
         name: "Smashy City",
@@ -721,8 +707,7 @@
         developer: "Ace Viral",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/3644-smashy-city-mod.html"
+        category: "action"
       },
       {
         name: "Snipers vs Thieves",
@@ -730,8 +715,7 @@
         developer: "PlayStack",
         mod: true,
         trending: true,
-        category: "shooter",
-        downloadUrl: "https://an1.com/4933-snipers-vs-thieves-mod.html"
+        category: "shooter"
       },
       {
         name: "Hills of Steel 2",
@@ -739,8 +723,7 @@
         developer: "Superplus Games",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/6461-hills-of-steel-2-mod.html"
+        category: "action"
       },
       {
         name: "Modern Warplanes",
@@ -748,8 +731,7 @@
         developer: "GDCompany",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/6689-modern-warplanes-sky-fighters-mod.html"
+        category: "action"
       },
       {
         name: "Grand Theft Auto III",
@@ -757,8 +739,7 @@
         developer: "Rockstar Games",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/7217-grand-theft-auto-iiiiiiii-mod-apk.html"
+        category: "action"
       },
       {
         name: "Special Ops",
@@ -766,8 +747,7 @@
         developer: "Hazmob",
         mod: true,
         trending: true,
-        category: "shooter",
-        downloadUrl: "https://an1.com/7285-special-ops-fps-pvp-gun-games-mod.html"
+        category: "shooter"
       },
       {
         name: "Miami Crime Simulator",
@@ -775,8 +755,7 @@
         developer: "Naxeex Ltd",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/6162-miami-crime-simulator-mod.html"
+        category: "action"
       },
       {
         name: "Shadow Fight 3",
@@ -784,8 +763,7 @@
         developer: "NEKKI",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/4245-shadow-fight-3-mod.html"
+        category: "action"
       },
       {
         name: "Into the Dead 2",
@@ -793,8 +771,7 @@
         developer: "PIKPOK",
         mod: true,
         trending: true,
-        category: "zombie",
-        downloadUrl: "https://an1.com/3552-into-the-dead-2-mod.html"
+        category: "zombie"
       },
       {
         name: "DEAD TARGET",
@@ -802,8 +779,7 @@
         developer: "VNG GAME STUDIOS",
         mod: true,
         trending: true,
-        category: "zombie",
-        downloadUrl: "https://an1.com/4125-dead-target-zombie-mod.html"
+        category: "zombie"
       },
       {
         name: "Battlelands Royale",
@@ -811,8 +787,7 @@
         developer: "Futureplay",
         mod: true,
         trending: true,
-        category: "shooter",
-        downloadUrl: "https://an1.com/6194-battlelands-royale-mod.html"
+        category: "shooter"
       },
       {
         name: "Brawl Stars",
@@ -820,8 +795,7 @@
         developer: "Supercell",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/7201-brawl-stars-mod.html"
+        category: "action"
       },
       {
         name: "Cyberika",
@@ -829,8 +803,7 @@
         developer: "Brickworks Games",
         mod: true,
         trending: true,
-        category: "adventure",
-        downloadUrl: "https://an1.com/7093-cyberika-mod.html"
+        category: "adventure"
       },
       {
         name: "Worms Zone.io",
@@ -838,8 +811,7 @@
         developer: "CASUAL AZUR GAMES",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/5675-worms-zone-io-mod.html"
+        category: "action"
       },
       {
         name: "Mini Militia - Doodle Army 2",
@@ -847,8 +819,7 @@
         developer: "Miniclip.com",
         mod: true,
         trending: true,
-        category: "shooter",
-        downloadUrl: "https://an1.com/4045-mini-militia-doodle-army-2-mod.html"
+        category: "shooter"
       },
       {
         name: "MadOut2 BigCityOnline",
@@ -856,8 +827,7 @@
         developer: "MadOut Games",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/4746-madout2-bigcityonline-mod.html"
+        category: "action"
       },
       {
         name: "NEW STATE Mobile",
@@ -865,8 +835,7 @@
         developer: "KRAFTON, Inc.",
         mod: true,
         trending: true,
-        category: "shooter",
-        downloadUrl: "https://an1.com/6974-pubg-new-state-apk.html"
+        category: "shooter"
       },
       {
         name: "PUBG MOBILE LITE",
@@ -874,8 +843,7 @@
         developer: "Level Infinite",
         mod: true,
         trending: true,
-        category: "shooter",
-        downloadUrl: "https://an1.com/5229-pubg-mobile-lite-original.html"
+        category: "shooter"
       },
       {
         name: "Soul Knight",
@@ -883,8 +851,7 @@
         developer: "ChillyRoom",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/1387-soul-knight-mod.html"
+        category: "action"
       },
       {
         name: "aquapark.io",
@@ -892,8 +859,7 @@
         developer: "VOODOO",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/6426-aquapark-io-mod.html"
+        category: "action"
       },
       {
         name: "Hair Challenge",
@@ -901,8 +867,7 @@
         developer: "Rollic Games",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/7032-hair-challenge-mod.html"
+        category: "action"
       },
       {
         name: "Sigmax",
@@ -910,8 +875,7 @@
         developer: "Studio Arm Private Limited",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/7149-sigma.html"
+        category: "action"
       },
       {
         name: "Goosebumps",
@@ -919,35 +883,31 @@
         developer: "Cosmic Forces",
         mod: true,
         trending: true,
-        category: "adventure",
-        downloadUrl: "https://an1.com/7267-goosebumps-night-of-scares-mod.html"
+        category: "adventure"
       },
       {
         name: "Banana Kong Blast",
-        image: "https://an1.com/uploads/bandnsfuwesrtgfrewt.png",
+        image: "https://an1.com/uploads/banana_kong_blast.png",
         developer: "FDG Entertainment GmbH",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/5905-banana-kong-blast-mod.html"
+        category: "action"
       },
       {
         name: "Metal Squad",
-        image: "https://an1.com/uploads/nwqeqr32w4r234.png",
+        image: "https://an1.com/uploads/metal_squad.png",
         developer: "Sora Game",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/4456-metal-squad-mod.html"
+        category: "action"
       },
       {
         name: "Rocket Royale",
-        image: "https://an1.com/uploads/rocketoraelwaqe.jpg",
+        image: "https://an1.com/uploads/rocket_royale.jpg",
         developer: "OneTonGames",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/4804-rocket-royale-mod.html"
+        category: "action"
       },
       {
         name: "The Pirate: Caribbean Hunt",
@@ -955,8 +915,7 @@
         developer: "Home Net Games",
         mod: true,
         trending: true,
-        category: "adventure",
-        downloadUrl: "https://an1.com/3359-the-pirate-caribbean-hunt-mod.html"
+        category: "adventure"
       },
       {
         name: "Killer Bean Unleashed",
@@ -964,44 +923,39 @@
         developer: "Killer Bean Studios",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/7344-killer-bean-unleashed-mod.html"
+        category: "action"
       },
       {
         name: "Smashy Road: Wanted",
-        image: "https://an1.com/uploads/smasfuhuertgeirt.png",
+        image: "https://an1.com/uploads/smashy_road.png",
         developer: "Bearbit Studios B.V.",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/1883-smashy-road-wanted-mod.html"
+        category: "action"
       },
       {
         name: "Mission Counter Attack",
-        image: "https://an1.com/uploads/misisottneet6i456rty.png",
+        image: "https://an1.com/uploads/mission_counter.png",
         developer: "Timuz Games",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/5784-mission-counter-attack-mod.html"
+        category: "action"
       },
       {
         name: "Impostor Legends",
-        image: "https://an1.com/uploads/impsogntrig45yg4.png",
+        image: "https://an1.com/uploads/impostor_legends.png",
         developer: "Dats.Games",
         mod: true,
         trending: true,
-        category: "strategy",
-        downloadUrl: "https://an1.com/6900-impostor-legends-mod.html"
+        category: "strategy"
       },
       {
         name: "Johnny Trigger: Sniper",
-        image: "https://an1.com/uploads/trhiytiojytuj.png",
+        image: "https://an1.com/uploads/johnny_trigger.png",
         developer: "SayGames",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/6419-johnny-trigger-sniper-mod.html"
+        category: "action"
       },
       {
         name: "The Sun Origin",
@@ -1009,8 +963,7 @@
         developer: "AGaming+",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/5341-the-sun-origin-mod.html"
+        category: "action"
       },
       {
         name: "Ninja Arashi",
@@ -1018,17 +971,15 @@
         developer: "Black Panther",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/7273-ninja-arashi-mod.html"
+        category: "action"
       },
       {
         name: "Bus Rush",
-        image: "https://an1.com/uploads/bdewsauihjfgre.jpg",
+        image: "https://an1.com/uploads/bus_rush.jpg",
         developer: "Play365",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/2946-bus-rush-mod.html"
+        category: "action"
       },
       {
         name: "The Tank",
@@ -1036,35 +987,31 @@
         developer: "BYV",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/7127-the-tank-mod.html"
+        category: "action"
       },
       {
         name: "Super Toss The Turtle",
-        image: "https://an1.com/uploads/strhiojtrhr.jpg",
+        image: "https://an1.com/uploads/turtle_toss.png",
         developer: "GonzoSSM",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/5834-super-toss-the-turtle-mod.html"
+        category: "action"
       },
       {
         name: "Zombie Diary 2: Evolution",
-        image: "https://an1.com/uploads/zbimtroyhiytj.png",
+        image: "https://an1.com/uploads/zombie_diary.png",
         developer: "Mountain Lion",
         mod: true,
         trending: true,
-        category: "zombie",
-        downloadUrl: "https://an1.com/724-zombie-diary-2-evolution-mod.html"
+        category: "zombie"
       },
       {
         name: "Bullet Bender",
-        image: "https://an1.com/uploads/buretuihtrtyj.png",
+        image: "https://an1.com/uploads/bullet_bender.png",
         developer: "Lion Studios",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/6367-bullet-bender-mod.html"
+        category: "action"
       },
       {
         name: "Slap Kings",
@@ -1072,62 +1019,55 @@
         developer: "Lion Studios",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/6202-slap-kings-mod.html"
+        category: "action"
       },
       {
         name: "Last Hope - Zombie Sniper 3D",
-        image: "https://an1.com/uploads/bandnsfuwesrtgfrewt.png",
+        image: "https://an1.com/uploads/last_hope_zombie.png",
         developer: "JE Software AB",
         mod: true,
         trending: true,
-        category: "zombie",
-        downloadUrl: "https://an1.com/5906-last-hope-zombie-sniper-3d-mod.html"
+        category: "zombie"
       },
       {
         name: "Zombie Objective",
-        image: "https://an1.com/uploads/zbortighiergter.jpg",
+        image: "https://an1.com/uploads/zombie_objective.jpg",
         developer: "Killer Bean Studios",
         mod: true,
         trending: true,
-        category: "zombie",
-        downloadUrl: "https://an1.com/1839-zombie-objective-mod.html"
+        category: "zombie"
       },
       {
         name: "JCheater: San Andreas Edition",
-        image: "https://an1.com/uploads/gtawsadsd.png",
+        image: "https://an1.com/uploads/jcheater.png",
         developer: "Net Tech Development Ltd",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/6166-jcheater-san-andreas-edition.html"
+        category: "action"
       },
       {
         name: "Arrow.io",
-        image: "https://an1.com/uploads/arrowiofdsf45645.png",
+        image: "https://an1.com/uploads/arrow_io.png",
         developer: "Cheetah Games",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/4415-arrow-io.html"
+        category: "action"
       },
       {
         name: "Hide Online - Hunters vs Props",
-        image: "https://an1.com/uploads/hideolredutgyjerdterter.png",
+        image: "https://an1.com/uploads/hide_online.png",
         developer: "HitRock",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/6865-hide-online-hunters-vs-props-mod.html"
+        category: "action"
       },
       {
         name: "Dragon Hills 2",
-        image: "https://an1.com/uploads/dragrthjityh.png",
+        image: "https://an1.com/uploads/dragon_hills.png",
         developer: "Rebel Twins",
         mod: true,
         trending: true,
-        category: "action",
-        downloadUrl: "https://an1.com/6914-dragon-hills-2-mod.html"
+        category: "action"
       }
     ];
 
@@ -1251,16 +1191,21 @@
         const rating = document.createElement('div');
         rating.className = 'rating';
         rating.innerHTML = `
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star-half-alt"></i>
+          <i class="fas fa-star" aria-hidden="true"></i>
+          <i class="fas fa-star" aria-hidden="true"></i>
+          <i class="fas fa-star" aria-hidden="true"></i>
+          <i class="fas fa-star" aria-hidden="true"></i>
+          <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+          <span class="sr-only">4.5 star rating</span>
         `;
         
-        const downloadBtn = document.createElement('span');
+        const downloadBtn = document.createElement('button');
         downloadBtn.className = 'download-btn';
         downloadBtn.textContent = 'Download Now';
+        downloadBtn.addEventListener('click', function(e) { 
+          e.preventDefault();
+          showContentLocker(game.name); 
+        });
         
         gameInfo.appendChild(title);
         gameInfo.appendChild(dev);
@@ -1269,14 +1214,89 @@
         
         // Link
         const link = document.createElement('a');
-        link.href = game.downloadUrl;
-        link.target = '_blank';
+        link.href = "#";
+        link.addEventListener('click', function(e) { 
+          e.preventDefault();
+          showContentLocker(game.name); 
+        });
         link.appendChild(imgContainer);
         link.appendChild(gameInfo);
         
         gameItem.appendChild(link);
         gameList.appendChild(gameItem);
       });
+    }
+
+    // Function to show content locker
+    function showContentLocker(gameName) {
+      // Create overlay
+      const overlay = document.createElement('div');
+      overlay.style.position = 'fixed';
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.width = '100%';
+      overlay.style.height = '100%';
+      overlay.style.backgroundColor = 'rgba(0,0,0,0.8)';
+      overlay.style.zIndex = '1000';
+      overlay.style.display = 'flex';
+      overlay.style.justifyContent = 'center';
+      overlay.style.alignItems = 'center';
+      
+      // Create content locker container
+      const lockerContainer = document.createElement('div');
+      lockerContainer.style.backgroundColor = '#1e1e1e';
+      lockerContainer.style.padding = '20px';
+      lockerContainer.style.borderRadius = '10px';
+      lockerContainer.style.maxWidth = '500px';
+      lockerContainer.style.width = '90%';
+      lockerContainer.style.textAlign = 'center';
+      
+      // Add title
+      const title = document.createElement('h2');
+      title.textContent = `Unlock Download for ${gameName}`;
+      title.style.color = '#8e44ad';
+      title.style.marginBottom = '20px';
+      
+      // Add instruction text
+      const instruction = document.createElement('p');
+      instruction.textContent = 'Complete the action below to unlock the download link';
+      instruction.style.color = '#ccc';
+      instruction.style.marginBottom = '20px';
+      
+      // Add content locker script
+      const lockerScript = document.createElement('script');
+      lockerScript.type = 'text/javascript';
+      lockerScript.id = 'ogjs';
+      lockerScript.src = 'https://locked4.com/cl/js/qkv5k3';
+      
+      // Add error handling for script
+      lockerScript.onerror = function() {
+        instruction.textContent = 'Could not load verification. Please try again later.';
+      };
+      
+      // Add close button
+      const closeBtn = document.createElement('button');
+      closeBtn.textContent = 'Close';
+      closeBtn.style.backgroundColor = '#e74c3c';
+      closeBtn.style.color = 'white';
+      closeBtn.style.border = 'none';
+      closeBtn.style.padding = '10px 20px';
+      closeBtn.style.borderRadius = '5px';
+      closeBtn.style.marginTop = '20px';
+      closeBtn.style.cursor = 'pointer';
+      closeBtn.addEventListener('click', function() {
+        document.body.removeChild(overlay);
+      });
+      
+      // Build the structure
+      lockerContainer.appendChild(title);
+      lockerContainer.appendChild(instruction);
+      lockerContainer.appendChild(lockerScript);
+      lockerContainer.appendChild(closeBtn);
+      overlay.appendChild(lockerContainer);
+      
+      // Add to document
+      document.body.appendChild(overlay);
     }
   </script>
 </body>
