@@ -1,1 +1,94 @@
-Hello EDGK
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Auto Gmail Creator ✨</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; background-color: #fdfdfd; color: #333; }
+    h1 { color: #102C57; font-size: 2.5em; margin-bottom: 0.5em; }
+    h2 { color: #102C57; margin-top: 1.5em; }
+    table { border-collapse: collapse; width: 100%; margin-top: 1em; }
+    th, td { border: 1px solid #ccc; padding: 8px; }
+    th { background-color: #F5EFE6; }
+    pre { background-color: #f4f4f4; padding: 10px; overflow-x: auto; }
+    code { font-family: Consolas, monospace; }
+    blockquote { border-left: 4px solid #D4AF37; padding-left: 10px; color: #555; margin: 1em 0; }
+  </style>
+</head>
+<body>
+  <h1>Auto Gmail Creator ✨</h1>
+  <blockquote><strong>Disclaimer:</strong> This website presents a <em>simulation tool</em> for educational and testing purposes. It <strong>does not</strong> create real Gmail accounts, interact with Google’s services, or bypass any security measures. Use responsibly.</blockquote>
+  <h2>🌟 Overview</h2>
+  <p>Auto Gmail Creator lets developers, testers, and marketers generate realistic mock Gmail accounts without touching external APIs. It uses the <a href="https://faker.readthedocs.io/en/master/">faker</a> library to create plausible names and emails, builds unique usernames, and generates secure passwords using Python’s <code>secrets</code> module. Each account also comes with a recovery email from a rotating set of providers.</p>
+  <p>The tool is written in Python and packaged as a CLI via <code>click</code> with rich terminal output from the <code>rich</code> library. It’s type‑checked with <code>mypy</code>, linted with <code>ruff</code>, and covered by tests using <code>pytest</code>.</p>
+  <h2>🚀 Features</h2>
+  <ul>
+    <li><strong>Bulk simulation</strong> — Generate any number of mock Gmail accounts.</li>
+    <li><strong>Unique credentials</strong> — Ensures unique usernames and emails in a single run.</li>
+    <li><strong>Secure passwords</strong> — Random passwords with uppercase, lowercase, digits, and symbols.</li>
+    <li><strong>Recovery email rotation</strong> — Uses various domains for recovery addresses.</li>
+    <li><strong>Demo‑only verification flag</strong> — A <code>--bypass-verification</code> option to mark <code>phone_verified</code> as <code>true</code> in the output (no real verification occurs).</li>
+    <li><strong>Export options</strong> — Save your generated data to CSV or JSON.</li>
+    <li><strong>Reproducibility</strong> — Seedable random generator for reproducible names/usernames.</li>
+    <li><strong>Password length control</strong> — Specify password lengths between 8 and 128 characters.</li>
+  </ul>
+  <h2>💻 Installation</h2>
+  <ol>
+    <li><p><strong>Clone the repo</strong></p><pre><code>git clone https://github.com/your-username/auto-gmail-creator.git
+cd auto-gmail-creator</code></pre></li>
+    <li><p><strong>Install dependencies</strong></p><p>This project uses <a href="https://python-poetry.org/">Poetry</a> for dependency management.</p><pre><code>poetry install</code></pre></li>
+    <li><p><strong>Activate the environment</strong></p><pre><code>poetry shell</code></pre></li>
+  </ol>
+  <h2>🚧 Usage</h2>
+  <p>Run the CLI via the <code>agc</code> command:</p>
+  <pre><code># Generate 5 accounts (default)
+agc generate
+
+# Generate 20 accounts
+agc generate --count 20
+
+# Save 100 accounts to a CSV
+agc generate --count 100 --output csv --output-path accounts.csv
+
+# Use a seed for reproducibility and longer passwords
+agc generate --count 10 --seed 123 --password-length 16
+
+# Mark phone verification as true in the output (demo only)
+agc generate --count 10 --bypass-verification</code></pre>
+  <h3>Helpful options</h3>
+  <table>
+    <tr><th>Option</th><th>Description</th></tr>
+    <tr><td><code>--count &lt;int&gt;</code></td><td>Number of accounts to generate (default: 5)</td></tr>
+    <tr><td><code>--output json/csv</code></td><td>Export format (when specified)</td></tr>
+    <tr><td><code>--output-path &lt;file&gt;</code></td><td>Custom export path</td></tr>
+    <tr><td><code>--seed &lt;int&gt;</code></td><td>Seed for reproducible names/usernames</td></tr>
+    <tr><td><code>--password-length</code></td><td>Length of generated passwords (8–128, default: 12)</td></tr>
+    <tr><td><code>--bypass-verification</code></td><td>Toggle <code>phone_verified</code> to <code>true</code> in the output (demo only)</td></tr>
+    <tr><td><code>--acknowledge-simulation</code></td><td>Explicitly acknowledge that this is a simulation tool</td></tr>
+  </table>
+  <h2>💻 Development</h2>
+  <p>This project follows modern Python best practices:</p>
+  <ul>
+    <li><strong>Static typing</strong> with <code>mypy</code>.</li>
+    <li><strong>Linting</strong> with <code>ruff</code>.</li>
+    <li><strong>CI</strong> with GitHub Actions on Python 3.10 and 3.11.</li>
+    <li><strong>Tests</strong> using <code>pytest</code> and <code>click.testing</code>.</li>
+  </ul>
+  <p>To run tests and linters:</p>
+  <pre><code>poetry run ruff check .
+poetry run mypy .
+poetry run pytest -q</code></pre>
+  <h2>💖 Support / Donations</h2>
+  <p>If you find this project useful and want to support development, you can send crypto donations here:</p>
+  <ul>
+    <li><strong>Bitcoin (BTC):</strong> your_btc_wallet_id</li>
+    <li><strong>Ethereum (ETH):</strong> your_eth_wallet_id</li>
+    <li><strong>USDT (TRC20):</strong> your_usdt_wallet_id</li>
+  </ul>
+  <p>Thank you for your support!</p>
+  <h2>📜 License</h2>
+  <p>This project is licensed under the MIT License. See the <code>LICENSE</code> file for details.</p>
+  <hr>
+  <p>Built with ❤️ using Python, Poetry, Click, Faker, and Rich.</p>
+</body>
+</html>
